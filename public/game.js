@@ -3148,6 +3148,8 @@ function updateTeamPanels() {
     const n  = i + 1;
     const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     setTxt(`play-t${n}-name`,  t.name);
+    const nameEl = document.getElementById(`play-t${n}-name`);
+    if (nameEl) nameEl.style.color = tc.color;
     setTxt(`play-t${n}-score`, t.score);
     const streak = state.streaks[i];
     setTxt(`panel-streak-${n}`, streak > 0 ? `HOT x${streak}` : '');
