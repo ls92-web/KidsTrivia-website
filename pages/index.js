@@ -31,7 +31,7 @@ export default function Home() {
         onClick={(e) => { e.currentTarget.classList.add('clicked'); setTimeout(() => window.goHome(), 220); }}
         title="Back to base"
       >
-        <svg className="home-beacon-icon" viewBox="0 0 28 28" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+        <svg className="home-beacon-icon" viewBox="0 0 28 28" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
           {/* Roof — right face (shadow) */}
           <path d="M14 3 L26 13 L14 13 Z" fill="#1462B8"/>
           {/* Roof — left face (lit) */}
