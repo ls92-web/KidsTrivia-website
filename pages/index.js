@@ -32,12 +32,7 @@ export default function Home() {
         title="Back to base"
       >
         <svg className="home-beacon-icon" viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-          {/* Roof */}
-          <polygon points="12,2 23,12 1,12" fill="#0B1E48"/>
-          {/* Body */}
-          <rect x="3" y="12" width="18" height="11" fill="#0B1E48"/>
-          {/* Door */}
-          <rect x="9" y="17" width="6" height="6" rx="1" fill="rgba(0,0,0,0.35)"/>
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="#0B1E48"/>
         </svg>
       </button>
 
