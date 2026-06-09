@@ -264,16 +264,16 @@ body {
 
 /* ===== HOME BEACON (fixed top-right) ===== */
 @keyframes hb-glow {
-  0%, 100% { filter: drop-shadow(0 0 4px rgba(100,165,255,0.3)); }
-  50%       { filter: drop-shadow(0 0 12px rgba(100,165,255,0.75)); }
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(100,165,255,0.55)) drop-shadow(0 2px 6px rgba(0,0,0,0.8)); }
+  50%       { filter: drop-shadow(0 0 16px rgba(100,165,255,0.95)) drop-shadow(0 2px 8px rgba(0,0,0,0.9)); }
 }
 @keyframes hb-bob {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-3px); }
 }
 @keyframes hb-green-flash {
-  0%   { filter: drop-shadow(0 0 10px rgba(60,220,100,0.9)); }
-  100% { filter: drop-shadow(0 0 4px rgba(60,220,100,0.4)); }
+  0%   { filter: drop-shadow(0 0 14px rgba(60,220,100,0.95)) drop-shadow(0 2px 6px rgba(0,0,0,0.9)); }
+  100% { filter: drop-shadow(0 0 6px rgba(60,220,100,0.5))  drop-shadow(0 2px 6px rgba(0,0,0,0.8)); }
 }
 
 .home-beacon {
@@ -307,7 +307,7 @@ body {
 .home-beacon:hover {
   color: rgba(200, 225, 255, 0.98);
   animation: none;
-  filter: drop-shadow(0 0 14px rgba(80,150,255,0.85));
+  filter: drop-shadow(0 0 18px rgba(80,150,255,0.95)) drop-shadow(0 2px 8px rgba(0,0,0,0.9));
   transform: scale(1.15);
 }
 .home-beacon:hover .home-beacon-icon {
