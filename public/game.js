@@ -3292,7 +3292,9 @@ function showTeamSwitch() {
   card.style.boxShadow   = `0 0 40px ${tc.color}22`;
   document.getElementById('switch-emoji').innerHTML =
     `<div style="width:80px;height:80px;margin:0 auto;filter:drop-shadow(0 0 18px ${tc.color})">${getAvatarSVG(tc.charId, 80)}</div>`;
-  document.getElementById('switch-team-name').textContent = t.name;
+  const switchName = document.getElementById('switch-team-name');
+  switchName.textContent = t.name;
+  switchName.style.color = tc.color;
   document.getElementById('switch-game-name').innerHTML = `<span style="display:inline-block;vertical-align:middle;margin-right:8px">${getMissionIconSVG(g.id,28)}</span>${g.name}`;
   showScreen('screen-switch');
 }
