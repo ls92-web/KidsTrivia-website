@@ -271,6 +271,20 @@ export default function Home() {
                 <span>Reveal</span>
               </button>
             </div>
+            <div className="powerups-bar" id="powerups-bar">
+              <button className="powerup-btn" id="pu-fifty" onClick={() => window.usePowerup('fifty')} title="50/50 — skip the hard part">
+                <span className="pu-icon pu-icon-fifty"></span><span className="pu-label">50/50</span>
+              </button>
+              <button className="powerup-btn" id="pu-double" onClick={() => window.usePowerup('double')} title="Double — next correct = 20 pts">
+                <span className="pu-icon pu-icon-double"></span><span className="pu-label">×2 Pts</span>
+              </button>
+              <button className="powerup-btn" id="pu-freeze" onClick={() => window.usePowerup('freeze')} title="Freeze — steal 5 pts from opponent">
+                <span className="pu-icon pu-icon-freeze"></span><span className="pu-label">Freeze</span>
+              </button>
+              <button className="powerup-btn" id="pu-galaxy" onClick={() => window.usePowerup('galaxy')} title="Galaxy — reveal extra hint">
+                <span className="pu-icon pu-icon-galaxy"></span><span className="pu-label">Galaxy</span>
+              </button>
+            </div>
           </div>
           <div className="timer-wrap" id="timer-wrap">
             <svg className="timer-svg" viewBox="0 0 120 120">
@@ -278,20 +292,6 @@ export default function Home() {
               <circle className="timer-fill" id="timer-circle" cx="60" cy="60" r="52"/>
             </svg>
             <div className="timer-num" id="timer-num">60</div>
-          </div>
-          <div className="powerups-bar" id="powerups-bar">
-            <button className="powerup-btn" id="pu-fifty" onClick={() => window.usePowerup('fifty')} title="50/50 — skip the hard part">
-              <span className="pu-icon pu-icon-fifty"></span><span className="pu-label">50/50</span>
-            </button>
-            <button className="powerup-btn" id="pu-double" onClick={() => window.usePowerup('double')} title="Double — next correct = 20 pts">
-              <span className="pu-icon pu-icon-double"></span><span className="pu-label">×2 Pts</span>
-            </button>
-            <button className="powerup-btn" id="pu-freeze" onClick={() => window.usePowerup('freeze')} title="Freeze — steal 5 pts from opponent">
-              <span className="pu-icon pu-icon-freeze"></span><span className="pu-label">Freeze</span>
-            </button>
-            <button className="powerup-btn" id="pu-galaxy" onClick={() => window.usePowerup('galaxy')} title="Galaxy — reveal extra hint">
-              <span className="pu-icon pu-icon-galaxy"></span><span className="pu-label">Galaxy</span>
-            </button>
           </div>
           <div className="score-row">
             <button className="btn-pass" onClick={() => window.recordAnswer(false)}>Pass</button>
