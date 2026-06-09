@@ -4394,7 +4394,7 @@ function initCometCursor() {
 }
 
 // ─── INIT ──────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded', () => {
+function _gameInit() {
   buildBackground();
   initCometCursor();
   // Populate team avatar placeholders on the name-entry screen
@@ -4405,5 +4405,10 @@ window.addEventListener('DOMContentLoaded', () => {
   // Apply team colors to avatar icons
   if (np1) np1.style.filter = `drop-shadow(0 0 10px ${state.teamCustom[0].color})`;
   if (np2) np2.style.filter = `drop-shadow(0 0 10px ${state.teamCustom[1].color})`;
-});
+}
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', _gameInit);
+} else {
+  _gameInit();
+}
 
