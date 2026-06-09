@@ -31,23 +31,13 @@ export default function Home() {
         onClick={(e) => { e.currentTarget.classList.add('clicked'); setTimeout(() => window.goHome(), 220); }}
         title="Back to base"
       >
-        <svg className="home-beacon-icon" viewBox="0 0 28 28" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-          {/* Roof — right face (shadow) */}
-          <path d="M14 3 L26 13 L14 13 Z" fill="#0A1A3A"/>
-          {/* Roof — left face (lit) */}
-          <path d="M14 3 L2 13 L14 13 Z" fill="#0E2554"/>
-          {/* Roof ridge highlight */}
-          <line x1="14" y1="3" x2="14" y2="3" stroke="#1A3A7A" strokeWidth="2" strokeLinecap="round"/>
-          {/* House body */}
-          <rect x="4" y="12" width="20" height="13" rx="1.5" fill="#0B1E48"/>
-          {/* Body — left highlight strip */}
-          <rect x="4" y="12" width="3.5" height="13" rx="1" fill="rgba(255,255,255,0.08)"/>
-          {/* Body — top edge shine */}
-          <ellipse cx="14" cy="12.5" rx="7" ry="1.3" fill="rgba(255,255,255,0.10)"/>
-          {/* Door arch */}
-          <path d="M11 25 L11 19.5 Q11 16.5 14 16.5 Q17 16.5 17 19.5 L17 25 Z" fill="#06102A"/>
-          {/* Door highlight */}
-          <ellipse cx="12.5" cy="18.5" rx="0.9" ry="1.4" fill="rgba(255,255,255,0.12)"/>
+        <svg className="home-beacon-icon" viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+          {/* Roof */}
+          <polygon points="12,2 23,12 1,12" fill="#0B1E48"/>
+          {/* Body */}
+          <rect x="3" y="12" width="18" height="11" fill="#0B1E48"/>
+          {/* Door */}
+          <rect x="9" y="17" width="6" height="6" rx="1" fill="rgba(0,0,0,0.35)"/>
         </svg>
       </button>
 
