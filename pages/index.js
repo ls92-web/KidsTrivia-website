@@ -295,7 +295,7 @@ export default function Home() {
           </div>
           <div className="score-row">
             <button className="btn-pass" onClick={() => window.recordAnswer(false)}>Pass</button>
-            <button className="btn-gotit" id="gotit-btn" onClick={() => window.recordAnswer(true)}>✓ GOT IT! +10</button>
+            <button className="btn-gotit" id="gotit-btn" onClick={() => window.recordAnswer(true)}>Got It!</button>
             <button className="btn-continue" onClick={() => window.continueQuestion()}>CONTINUE</button>
           </div>
         </div>
