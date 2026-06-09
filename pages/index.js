@@ -31,10 +31,23 @@ export default function Home() {
         onClick={(e) => { e.currentTarget.classList.add('clicked'); setTimeout(() => window.goHome(), 220); }}
         title="Back to base"
       >
-        <svg className="home-beacon-icon" viewBox="0 0 20 20" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="10,2 18,9 2,9" fill="currentColor"/>
-          <rect x="4" y="8.5" width="12" height="9" rx="1" fill="currentColor" opacity="0.85"/>
-          <rect x="8" y="13" width="4" height="4.5" rx="0.5" fill="currentColor" opacity="0.3"/>
+        <svg className="home-beacon-icon" viewBox="0 0 28 28" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+          {/* Roof — right face (shadow) */}
+          <path d="M14 3 L26 13 L14 13 Z" fill="#1462B8"/>
+          {/* Roof — left face (lit) */}
+          <path d="M14 3 L2 13 L14 13 Z" fill="#4AAAF2"/>
+          {/* Roof ridge highlight */}
+          <line x1="14" y1="3" x2="14" y2="3" stroke="#A8DAFF" strokeWidth="2" strokeLinecap="round"/>
+          {/* House body */}
+          <rect x="4" y="12" width="20" height="13" rx="1.5" fill="#2484DC"/>
+          {/* Body — left highlight strip */}
+          <rect x="4" y="12" width="3.5" height="13" rx="1" fill="rgba(255,255,255,0.18)"/>
+          {/* Body — top edge shine */}
+          <ellipse cx="14" cy="12.5" rx="7" ry="1.3" fill="rgba(255,255,255,0.2)"/>
+          {/* Door arch */}
+          <path d="M11 25 L11 19.5 Q11 16.5 14 16.5 Q17 16.5 17 19.5 L17 25 Z" fill="#0E52A8"/>
+          {/* Door highlight */}
+          <ellipse cx="12.5" cy="18.5" rx="0.9" ry="1.4" fill="rgba(255,255,255,0.22)"/>
         </svg>
       </button>
 

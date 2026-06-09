@@ -264,60 +264,82 @@ body {
 
 /* ===== HOME BEACON (fixed top-right) ===== */
 @keyframes hb-glow {
-  0%, 100% { filter: drop-shadow(0 0 6px rgba(100,165,255,0.55)) drop-shadow(0 2px 6px rgba(0,0,0,0.8)); }
-  50%       { filter: drop-shadow(0 0 16px rgba(100,165,255,0.95)) drop-shadow(0 2px 8px rgba(0,0,0,0.9)); }
+  0%, 100% {
+    box-shadow: 0 5px 14px rgba(10,60,180,0.5), 0 2px 4px rgba(0,0,0,0.35),
+                inset 0 2px 4px rgba(255,255,255,0.38), inset 0 -3px 6px rgba(0,20,90,0.45);
+  }
+  50% {
+    box-shadow: 0 8px 22px rgba(20,100,220,0.72), 0 3px 6px rgba(0,0,0,0.4),
+                inset 0 2px 4px rgba(255,255,255,0.48), inset 0 -3px 6px rgba(0,30,110,0.52);
+  }
 }
 @keyframes hb-bob {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-3px); }
 }
 @keyframes hb-green-flash {
-  0%   { filter: drop-shadow(0 0 14px rgba(60,220,100,0.95)) drop-shadow(0 2px 6px rgba(0,0,0,0.9)); }
-  100% { filter: drop-shadow(0 0 6px rgba(60,220,100,0.5))  drop-shadow(0 2px 6px rgba(0,0,0,0.8)); }
+  0%   {
+    box-shadow: 0 6px 20px rgba(50,210,90,0.75), 0 2px 4px rgba(0,0,0,0.3),
+                inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -3px 5px rgba(0,60,20,0.4);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(50,210,90,0.35), 0 2px 3px rgba(0,0,0,0.25),
+                inset 0 2px 3px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,40,15,0.3);
+  }
 }
 
 .home-beacon {
   position: fixed;
-  top: 18px;
-  right: 18px;
+  top: 14px;
+  right: 14px;
   z-index: 9000;
-  width: 36px;
-  height: 36px;
-  border-radius: 0;
-  background: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  /* 3D outer ring — blue gradient, lit top-left */
+  background: radial-gradient(circle at 36% 28%, #7DCAFF, #2480DC 52%, #0E52A8);
   border: none;
   cursor: pointer;
   display: none;
   align-items: center;
   justify-content: center;
-  color: rgba(140, 190, 255, 0.72);
-  transition: color 0.22s, transform 0.15s, filter 0.22s;
-  animation: hb-glow 3.5s ease-in-out infinite;
   outline: none;
   padding: 0;
+  animation: hb-glow 3.5s ease-in-out infinite;
+  transition: transform 0.15s;
+}
+/* Inner recessed white circle */
+.home-beacon::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 30%, #FFFFFF 0%, #CBE8FF 100%);
+  box-shadow: inset 0 2px 8px rgba(15,70,200,0.28), inset 0 -1px 2px rgba(255,255,255,0.7);
+  pointer-events: none;
 }
 .home-beacon.visible { display: flex; }
 
 .home-beacon-icon {
   animation: hb-bob 3.5s ease-in-out infinite;
   display: block;
+  position: relative;
+  z-index: 1;
 }
 .home-beacon:hover {
-  color: rgba(200, 225, 255, 0.98);
   animation: none;
-  filter: drop-shadow(0 0 18px rgba(80,150,255,0.95)) drop-shadow(0 2px 8px rgba(0,0,0,0.9));
-  transform: scale(1.15);
+  transform: scale(1.1);
+  box-shadow: 0 10px 28px rgba(20,100,220,0.75), 0 3px 8px rgba(0,0,0,0.42),
+              inset 0 2px 4px rgba(255,255,255,0.48), inset 0 -3px 7px rgba(0,30,100,0.55);
 }
 .home-beacon:hover .home-beacon-icon {
   animation: hb-bob 3.5s ease-in-out infinite;
 }
 .home-beacon.clicked,
 .home-beacon:active {
-  color: rgb(70, 225, 115);
+  background: radial-gradient(circle at 36% 28%, #88F0AA, #22C060 52%, #0E7030);
   animation: hb-green-flash 0.35s ease-out forwards;
-  transform: scale(0.92);
+  transform: scale(0.93);
 }
 
 /* ===== BUTTONS ===== */
