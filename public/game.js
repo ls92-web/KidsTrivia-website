@@ -3184,7 +3184,7 @@ function refreshPowerupUI() {
   // Show double active state
   const gotit = document.getElementById('gotit-btn');
   if (gotit) gotit.classList.toggle('double-active', state.doublePts);
-  if (gotit) gotit.textContent = state.doublePts ? 'GOT IT! +20' : 'GOT IT! +10';
+  if (gotit) gotit.textContent = state.doublePts ? 'Got it! +20' : 'Got it!';
 }
 
 function usePowerup(type) {
