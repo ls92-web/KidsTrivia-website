@@ -1239,23 +1239,38 @@ body {
 /* Card hint/reveal icon buttons */
 .card-icon-btns {
   display: flex;
-  justify-content: flex-end;
   gap: 8px;
-  margin-top: 14px;
+  margin-left: auto;
 }
 .card-icon-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
   border: none;
   border-radius: 20px;
-  padding: 7px 14px 7px 10px;
+  padding: 7px 10px;
   font-size: 13px;
   font-weight: 800;
   font-family: 'Nunito', sans-serif;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s, gap 0.2s, padding 0.2s;
   backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+.card-icon-btn span {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.25s ease, opacity 0.2s ease;
+  opacity: 0;
+}
+.card-icon-btn:hover {
+  gap: 6px;
+  padding: 7px 14px 7px 10px;
+}
+.card-icon-btn:hover span {
+  max-width: 60px;
+  opacity: 1;
 }
 .card-icon-btn:active { transform: scale(0.95); }
 .card-icon-hint {
