@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>The Challenge!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=37" />
+</head>
+<body>
+
+  <!-- Galaxy Background -->
+  <div id="galaxy-bg">
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+    <div class="nebula nebula-3"></div>
+    <div id="floating-bg"></div>
+  </div>
+  <div id="confetti-container"></div>
+
+  <!-- Character reaction overlay -->
+  <div id="char-react-overlay" class="char-react-overlay"></div>
+
+  <!-- home nav is embedded in the pick-banner panel — no floating button -->
+
+  <!-- ===== SCREEN: WELCOME ===== -->
+  <div id="screen-welcome" class="screen active">
+    <div class="screen-content">
+      <div class="logo-wrap">
+        <div class="space-rocket-logo" id="welcome-rocket-logo"></div>
+        <h1 class="game-title">SpaceKids</h1>
+        <p class="tagline">Where fun never ends!</p>
+      </div>
+      <div class="how-to-steps glass-card">
+        <div class="step-item"><span class="step-num">1</span> Name your space crew</div>
+        <div class="step-item"><span class="step-num">2</span> Each team picks 3 missions</div>
+        <div class="step-item"><span class="step-num">3</span> Travel through the galaxy!</div>
+        <div class="step-item bonus-step"><span class="bonus-star-icon"></span> Sibling Challenges = BONUS points!</div>
+      </div>
+      <button class="btn-primary btn-huge pulse-btn" onclick="showScreen('screen-teams')">
+        <span class="btn-rocket-icon"></span> LAUNCH MISSION!
+      </button>
+      <button class="scores-btn" onclick="showLeaderboard()"><span class="btn-trophy-icon"></span> Mission Records</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: LEADERBOARD ===== -->
+  <div id="screen-scores" class="screen">
+    <div class="screen-content">
+      <h2 class="screen-title">Mission Records</h2>
+      <div id="scores-board" class="scores-board"></div>
+      <div id="scores-empty" class="scores-empty hidden">
+        <p>No missions completed yet!</p>
+        <p>Launch your first mission!</p>
+      </div>
+      <div class="scores-actions">
+        <button class="btn-primary btn-large" onclick="showScreen('screen-welcome')">← Back to Base</button>
+        <button class="btn-secondary" onclick="clearScores()">Clear Records</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: TEAM SETUP ===== -->
+  <div id="screen-teams" class="screen">
+    <div class="screen-content">
+
+      <!-- ── Phase 0: Enter Names ── -->
+      <div id="setup-phase-0">
+        <h2 class="screen-title">Assemble Your Crew!</h2>
+        <div class="team-setup-row">
+          <div class="team-input-card t1-card glass-card">
+            <div class="team-avatar-icon" id="name-prev-1"></div>
+            <label>Team 1</label>
+            <input type="text" id="team1-input" class="team-name-input t1-input" placeholder="Enter name..." maxlength="15" />
+            <div class="name-suggestions">
+              <span onclick="setName(1,'The Stars')">The Stars</span>
+              <span onclick="setName(1,'Thunderbolts')">Thunderbolts</span>
+              <span onclick="setName(1,'Lions')">Lions</span>
+              <span onclick="setName(1,'Rockets')">Rockets</span>
+            </div>
+          </div>
+          <div class="vs-circle">VS</div>
+          <div class="team-input-card t2-card glass-card">
+            <div class="team-avatar-icon" id="name-prev-2"></div>
+            <label>Team 2</label>
+            <input type="text" id="team2-input" class="team-name-input t2-input" placeholder="Enter name..." maxlength="15" />
+            <div class="name-suggestions">
+              <span onclick="setName(2,'Dragons')">Dragons</span>
+              <span onclick="setName(2,'Dolphins')">Dolphins</span>
+              <span onclick="setName(2,'Pandas')">Pandas</span>
+              <span onclick="setName(2,'Wizards')">Wizards</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-primary btn-large" onclick="proceedToCustomize()">CREATE YOUR IDENTITY →</button>
+        <button class="btn-back" onclick="showScreen('screen-welcome')">← Back</button>
+      </div>
+
+      <!-- ── Phase 1+2: Character customization ── -->
+      <div id="setup-phase-custom" style="display:none">
+        <div class="custom-header">
+          <span class="custom-team-pill" id="custom-team-pill">TEAM 1</span>
+          <span class="custom-team-title" id="custom-team-title">Team Name</span>
+        </div>
+
+        <!-- Live preview card -->
+        <div class="custom-preview glass-card">
+          <div class="custom-char-big" id="custom-char-preview"></div>
+          <div class="custom-preview-details">
+            <div class="custom-char-name" id="custom-char-name">Astronaut</div>
+            <div class="custom-sub-row">
+              <span class="custom-color-dot" id="custom-color-prev" style="background:#2B9FFF">Blue</span>
+              <span class="custom-rocket-prev" id="custom-rocket-prev"></span>
+            </div>
+            <div class="custom-badge-prev" id="custom-badge-prev"></div>
+          </div>
+        </div>
+
+        <!-- Character picker -->
+        <div class="custom-section-label">CHOOSE CHARACTER</div>
+        <div class="char-grid" id="char-grid"></div>
+
+        <!-- Rocket picker -->
+        <div class="custom-section-label">CHOOSE ROCKET</div>
+        <div class="rocket-row" id="rocket-row"></div>
+
+        <!-- Color picker -->
+        <div class="custom-section-label">TEAM COLOR</div>
+        <div class="color-row" id="color-row"></div>
+
+        <!-- Badge picker -->
+        <div class="custom-section-label">TEAM BADGE</div>
+        <div class="badge-row" id="badge-row"></div>
+
+        <button class="btn-primary btn-large" id="custom-done-btn" onclick="confirmCustomize()">NEXT: TEAM 2 →</button>
+        <button class="btn-back" onclick="backFromCustomize()">← Back</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: MISSION SELECTION ===== -->
+  <div id="screen-mission-select" class="screen">
+    <div class="screen-content screen-wide">
+
+      <!-- Pick turn banner -->
+      <div class="pick-banner glass-card" id="pick-banner">
+        <div class="pick-banner-left">
+          <span class="pick-char" id="pick-char"></span>
+          <div class="pick-banner-text">
+            <div class="pick-team-name" id="pick-team-name">Team Name</div>
+            <div class="pick-instruction">is choosing mission <strong id="pick-num">1</strong> of 3</div>
+          </div>
+        </div>
+        <div class="pick-banner-right">
+          <div class="pick-slots-row">
+            <div class="pick-slot" id="pslot-0" title="Team 1 — pick 1"></div>
+            <div class="pick-slot" id="pslot-2" title="Team 1 — pick 2"></div>
+            <div class="pick-slot" id="pslot-4" title="Team 1 — pick 3"></div>
+            <div class="pick-divider">|</div>
+            <div class="pick-slot" id="pslot-1" title="Team 2 — pick 1"></div>
+            <div class="pick-slot" id="pslot-3" title="Team 2 — pick 2"></div>
+            <div class="pick-slot" id="pslot-5" title="Team 2 — pick 3"></div>
+          </div>
+          <!-- home nav — embedded in the panel surface, right edge -->
+          <button class="panel-home-nav" onclick="goHome()" title="Back to base">
+            <svg viewBox="0 0 20 20" width="15" height="15" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="10,2 18,9 2,9" fill="currentColor"/>
+              <rect x="4" y="8.5" width="12" height="9" rx="1" fill="currentColor" opacity="0.78"/>
+              <rect x="8" y="13" width="4" height="4.5" rx="0.5" fill="currentColor" opacity="0.22"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Screen title -->
+      <h2 class="msel-title">Choose Your Missions</h2>
+
+      <!-- Mission cards galaxy grid -->
+      <div class="mission-galaxy-grid" id="mission-galaxy-grid"></div>
+
+      <button class="btn-back" onclick="goHome()" style="margin-top:8px">← Back to Base</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: GAME INTRO ===== -->
+  <div id="screen-game-intro" class="screen">
+    <div class="screen-content">
+      <div class="world-badge" id="world-badge">
+        <span id="world-icon"></span>
+        <span id="world-name">Moon Base</span>
+      </div>
+      <div class="game-badge" id="intro-badge">Mission 1 of 3</div>
+      <div class="intro-emoji" id="intro-emoji"></div>
+      <h2 class="intro-title" id="intro-title">Game Title</h2>
+      <p class="intro-desc" id="intro-desc">Game description</p>
+      <div class="intro-scores">
+        <div class="intro-score-card glass-card" id="intro-card-1">
+          <div class="intro-char-icon" id="intro-char-1"></div>
+          <div class="intro-score-name" id="intro-t1-name">Team 1</div>
+          <div class="intro-score-num" id="intro-t1-score">0</div>
+          <div class="intro-score-label">pts</div>
+        </div>
+        <div class="intro-score-card glass-card" id="intro-card-2">
+          <div class="intro-char-icon" id="intro-char-2"></div>
+          <div class="intro-score-name" id="intro-t2-name">Team 2</div>
+          <div class="intro-score-num" id="intro-t2-score">0</div>
+          <div class="intro-score-label">pts</div>
+        </div>
+      </div>
+      <button class="btn-primary btn-large" onclick="beginCurrentGame()">LAUNCH!</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: TEAM SWITCH ===== -->
+  <div id="screen-switch" class="screen">
+    <div class="screen-content">
+      <p class="switch-label">PREPARE FOR LAUNCH</p>
+      <div class="switch-card glass-card" id="switch-card">
+        <div class="switch-emoji" id="switch-emoji"></div>
+        <h2 class="switch-team" id="switch-team-name">Team Name</h2>
+        <p class="switch-sub">It's your turn!</p>
+        <p class="switch-game" id="switch-game-name">Game Name</p>
+      </div>
+      <button class="btn-primary btn-large" onclick="showQuestion()">WE'RE READY! →</button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: PLAYING ===== -->
+  <div id="screen-playing" class="screen">
+    <div class="screen-content screen-wide">
+
+      <!-- World indicator -->
+      <div class="world-indicator" id="world-indicator">
+        <span id="play-world-icon"></span>
+        <span id="play-world-name">Moon Base</span>
+      </div>
+
+      <!-- Team panels (spaceship control stations) -->
+      <div class="team-panels">
+        <div class="team-panel t1-panel" id="team-panel-1">
+          <div class="panel-avatar" id="panel-char-1"></div>
+          <div class="panel-info">
+            <div class="panel-name" id="play-t1-name">Team 1</div>
+            <div class="panel-score" id="play-t1-score">0</div>
+            <div class="panel-streak" id="panel-streak-1"></div>
+          </div>
+          <div class="panel-badges" id="panel-badges-1"></div>
+        </div>
+
+        <div class="score-bar-center">
+          <div class="game-label" id="play-game-label">Mission 1/3</div>
+          <div class="round-pips" id="round-pips"></div>
+        </div>
+
+        <div class="team-panel t2-panel" id="team-panel-2">
+          <div class="panel-info" style="text-align:right">
+            <div class="panel-name" id="play-t2-name">Team 2</div>
+            <div class="panel-score" id="play-t2-score">0</div>
+            <div class="panel-streak" id="panel-streak-2"></div>
+          </div>
+          <div class="panel-avatar" id="panel-char-2"></div>
+          <div class="panel-badges" id="panel-badges-2"></div>
+        </div>
+      </div>
+
+      <!-- Current team banner -->
+      <div class="team-banner" id="team-banner">Team's Turn!</div>
+
+      <!-- Holographic Question Card -->
+      <div class="holo-card" id="question-card">
+        <div class="holo-scanline"></div>
+        <div class="qcard-header">
+          <span class="qcard-emoji" id="qcard-emoji"></span>
+          <span class="qcard-game" id="qcard-game">Mission</span>
+        </div>
+        <div class="question-text" id="question-text">Question goes here...</div>
+        <div id="answer-box" class="answer-box hidden">
+          <div class="answer-label">Answer:</div>
+          <div class="answer-text" id="answer-text">Answer here</div>
+        </div>
+        <div id="hint-box" class="hint-box hidden">
+          <div class="hint-inner" id="hint-text">Hint here</div>
+        </div>
+        <!-- Hint / Reveal icon buttons -->
+        <div class="card-icon-btns">
+          <button class="card-icon-btn card-icon-hint" id="hint-btn" onclick="showHint()" title="Hint">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 12.5c0 1.2.5 2.3 1.3 3H13.7c.8-.7 1.3-1.8 1.3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <rect x="9.5" y="15.5" width="5" height="1.5" rx="0.75" fill="currentColor"/>
+              <rect x="10" y="17" width="4" height="1.5" rx="0.75" fill="currentColor"/>
+            </svg>
+            <span>Hint</span>
+          </button>
+          <button class="card-icon-btn card-icon-reveal" id="reveal-btn" onclick="revealAnswer()" title="Reveal Answer">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="12" cy="12" rx="9" ry="5.5" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+            </svg>
+            <span>Reveal</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Timer -->
+      <div class="timer-wrap" id="timer-wrap">
+        <svg class="timer-svg" viewBox="0 0 120 120">
+          <circle class="timer-track" cx="60" cy="60" r="52"/>
+          <circle class="timer-fill" id="timer-circle" cx="60" cy="60" r="52"/>
+        </svg>
+        <div class="timer-num" id="timer-num">60</div>
+      </div>
+
+      <!-- Power-ups -->
+      <div class="powerups-bar" id="powerups-bar">
+        <button class="powerup-btn" id="pu-fifty" onclick="usePowerup('fifty')" title="50/50 — skip the hard part">
+          <span class="pu-icon pu-icon-fifty"></span><span class="pu-label">50/50</span>
+        </button>
+        <button class="powerup-btn" id="pu-double" onclick="usePowerup('double')" title="Double — next correct = 20 pts">
+          <span class="pu-icon pu-icon-double"></span><span class="pu-label">×2 Pts</span>
+        </button>
+        <button class="powerup-btn" id="pu-freeze" onclick="usePowerup('freeze')" title="Freeze — steal 5 pts from opponent">
+          <span class="pu-icon pu-icon-freeze"></span><span class="pu-label">Freeze</span>
+        </button>
+        <button class="powerup-btn" id="pu-galaxy" onclick="usePowerup('galaxy')" title="Galaxy — reveal extra hint">
+          <span class="pu-icon pu-icon-galaxy"></span><span class="pu-label">Galaxy</span>
+        </button>
+      </div>
+
+      <div class="score-row">
+        <button class="btn-pass" onclick="recordAnswer(false)">✗ PASS</button>
+        <button class="btn-gotit" id="gotit-btn" onclick="recordAnswer(true)">✓ GOT IT! +10</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: SIBLING CHALLENGE ===== -->
+  <div id="screen-sibling" class="screen">
+    <div class="screen-content">
+      <div class="sibling-chars">
+        <span class="sibling-char" id="sibling-char-1"></span>
+        <span class="sibling-heart sibling-heart-icon"></span>
+        <span class="sibling-char" id="sibling-char-2"></span>
+      </div>
+      <h2 class="sibling-title">SIBLING<br>CHALLENGE!</h2>
+      <p class="sibling-sub">Work together — BOTH teams earn bonus points!</p>
+      <div class="sibling-card glass-card">
+        <div class="sibling-card-emoji" id="sibling-emoji"></div>
+        <h3 class="sibling-card-title" id="sibling-chal-title">Challenge Title</h3>
+        <p class="sibling-card-desc" id="sibling-chal-desc">Challenge description here</p>
+        <div class="sibling-bonus">Both teams earn <span id="sibling-pts">20</span> bonus points!</div>
+      </div>
+      <div class="sibling-btn-row">
+        <button class="btn-primary btn-large" onclick="completeSibling(true)">WE DID IT!</button>
+        <button class="btn-secondary" onclick="completeSibling(false)">Skip this time</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: GAME RESULTS ===== -->
+  <div id="screen-game-result" class="screen">
+    <div class="screen-content">
+      <h2 class="screen-title" id="gresult-title">Mission Complete!</h2>
+      <div class="gresult-scores">
+        <div class="gresult-card glass-card" id="gresult-card-1">
+          <div class="gresult-char" id="gresult-char-1"></div>
+          <div class="gresult-name" id="gresult-t1-name">Team 1</div>
+          <div class="gresult-pts" id="gresult-t1-score">0</div>
+          <div class="gresult-label">pts</div>
+        </div>
+        <div class="gresult-vs">VS</div>
+        <div class="gresult-card glass-card" id="gresult-card-2">
+          <div class="gresult-char" id="gresult-char-2"></div>
+          <div class="gresult-name" id="gresult-t2-name">Team 2</div>
+          <div class="gresult-pts" id="gresult-t2-score">0</div>
+          <div class="gresult-label">pts</div>
+        </div>
+      </div>
+      <div class="gresult-lead" id="gresult-lead"></div>
+      <button class="btn-primary btn-large" id="gresult-next-btn" onclick="proceedAfterGame()">
+        NEXT WORLD →
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: FINAL RESULTS ===== -->
+  <div id="screen-final" class="screen">
+    <div class="screen-content">
+      <div class="winner-crown" id="winner-crown"></div>
+      <h2 class="winner-announce">GALAXY CHAMPION!</h2>
+      <div class="winner-name" id="winner-name">Team Name</div>
+      <div class="final-chars">
+        <span class="final-char celebrate" id="final-char-1"></span>
+        <span class="final-char celebrate" id="final-char-2"></span>
+      </div>
+      <div class="final-scores">
+        <div class="final-score-card t1-card glass-card" id="final-t1-card">
+          <div class="final-score-name" id="final-t1-name">Team 1</div>
+          <div class="final-score-num" id="final-t1-score">0</div>
+          <div>points</div>
+        </div>
+        <div class="final-score-card t2-card glass-card" id="final-t2-card">
+          <div class="final-score-name" id="final-t2-name">Team 2</div>
+          <div class="final-score-num" id="final-t2-score">0</div>
+          <div>points</div>
+        </div>
+      </div>
+      <p class="final-msg" id="final-msg">What an amazing adventure!</p>
+      <div class="final-action-row">
+        <button class="btn-primary btn-large" onclick="playAgain()">Play Again!</button>
+        <button class="btn-back" style="font-size:15px;padding:10px 22px" onclick="newCrews()">New Crews</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MISSION INFO MODAL ===== -->
+  <div id="mission-info-modal" class="mission-info-modal" style="display:none">
+    <div class="minfo-backdrop" onclick="closeMissionInfo()"></div>
+    <div class="mission-info-card glass-card" id="mission-info-card">
+      <button class="minfo-close-btn" onclick="closeMissionInfo()">✕</button>
+      <div class="minfo-top">
+        <span class="minfo-emoji" id="minfo-emoji"></span>
+        <div class="minfo-header-text">
+          <h3 class="minfo-title" id="minfo-title">Mission Title</h3>
+          <div class="minfo-tags">
+            <span class="minfo-tag minfo-type-tag" id="minfo-type">Challenge</span>
+            <span class="minfo-tag minfo-diff-tag" id="minfo-diff">★★☆ Explorer</span>
+            <span class="minfo-tag minfo-age-tag" id="minfo-age">Ages 6+</span>
+          </div>
+        </div>
+      </div>
+      <p class="minfo-longdesc" id="minfo-longdesc">Description here.</p>
+      <div class="minfo-examples-label">Example challenges:</div>
+      <ul class="minfo-examples" id="minfo-examples">
+        <li>Example 1</li>
+        <li>Example 2</li>
+        <li>Example 3</li>
+      </ul>
+      <div class="minfo-btns">
+        <button class="btn-primary btn-large" id="minfo-choose-btn" onclick="chooseMission()">Choose This Mission</button>
+        <button class="btn-back" onclick="closeMissionInfo()">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Warp tunnel transition overlay -->
+  <div id="warp-tunnel" class="warp-tunnel"></div>
+
+  <script src="game.js?v=37"></script>
+</body>
+</html>
