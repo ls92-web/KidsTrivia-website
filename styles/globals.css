@@ -387,8 +387,11 @@ body {
 .btn-secondary:hover { background: rgba(100,150,255,0.22); border-color: rgba(100,150,255,0.5); }
 
 .btn-back {
-  background: rgba(6, 14, 42, 0.75);
-  border: 1px solid rgba(100, 160, 255, 0.28);
+  --pcat: #4488FF;
+  background:
+    radial-gradient(ellipse at 50% -5%, color-mix(in srgb, var(--pcat) 22%, transparent) 0%, transparent 60%),
+    linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
+  border: 1.5px solid rgba(255,255,255,0.07);
   border-radius: 20px;
   padding: 8px 18px;
   color: rgba(180, 210, 255, 0.85);
@@ -397,17 +400,34 @@ body {
   font-weight: 800;
   letter-spacing: 0.03em;
   cursor: pointer;
-  backdrop-filter: blur(14px);
-  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s, color 0.2s;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 6px 28px rgba(0,0,0,0.65),
+    0 0 22px color-mix(in srgb, var(--pcat) 14%, transparent),
+    0 0 0 1px rgba(0,0,0,0.3);
   text-decoration: none;
 }
+.btn-back::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pcat), transparent);
+  opacity: 0.7;
+  pointer-events: none;
+  border-radius: 0 0 3px 3px;
+}
 .btn-back:hover {
-  background: rgba(20, 40, 100, 0.9);
-  border-color: rgba(100, 160, 255, 0.55);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0,100,255,0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    0 10px 36px rgba(0,0,0,0.72),
+    0 0 32px color-mix(in srgb, var(--pcat) 30%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--pcat) 40%, transparent);
 }
 .btn-back:active { transform: translateY(0); }
 
@@ -438,18 +458,45 @@ body {
 
 /* ===== SCORES BTN ===== */
 .scores-btn {
-  background: rgba(100,150,255,0.1);
-  border: 1px solid rgba(100,150,255,0.28);
-  color: rgba(140,190,255,0.9);
+  --pcat: #FFD700;
+  background:
+    radial-gradient(ellipse at 50% -5%, color-mix(in srgb, var(--pcat) 22%, transparent) 0%, transparent 60%),
+    linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
+  border: 1.5px solid rgba(255,255,255,0.07);
+  color: rgba(255, 220, 120, 0.9);
   border-radius: 50px;
   font-family: 'Nunito', sans-serif;
   font-size: 15px;
   font-weight: 800;
   padding: 10px 24px;
   cursor: pointer;
-  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 6px 28px rgba(0,0,0,0.65),
+    0 0 22px color-mix(in srgb, var(--pcat) 14%, transparent),
+    0 0 0 1px rgba(0,0,0,0.3);
 }
-.scores-btn:hover { background: rgba(100,150,255,0.22); }
+.scores-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pcat), transparent);
+  opacity: 0.75;
+  pointer-events: none;
+  border-radius: 0 0 3px 3px;
+}
+.scores-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    0 10px 36px rgba(0,0,0,0.72),
+    0 0 32px color-mix(in srgb, var(--pcat) 30%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--pcat) 40%, transparent);
+}
 
 /* ===== TEAM SETUP ===== */
 #setup-phase-0 .btn-primary,
@@ -473,6 +520,11 @@ body {
   justify-content: center;
 }
 .team-input-card {
+  --pcat: #4488FF;
+  background:
+    radial-gradient(ellipse at 50% -5%, color-mix(in srgb, var(--pcat) 20%, transparent) 0%, transparent 58%),
+    linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
+  border: 1.5px solid rgba(255,255,255,0.07);
   border-radius: var(--radius-lg);
   padding: 28px 22px;
   flex: 1;
@@ -482,16 +534,27 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  transition: transform 0.2s;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 6px 28px rgba(0,0,0,0.65),
+    0 0 32px color-mix(in srgb, var(--pcat) 18%, transparent),
+    0 0 0 1px rgba(0,0,0,0.3);
 }
-.t1-card {
-  border-color: rgba(43,159,255,0.38) !important;
-  box-shadow: 0 0 36px rgba(43,159,255,0.18), inset 0 1px 0 rgba(43,159,255,0.08) !important;
+.team-input-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pcat), transparent);
+  opacity: 0.75;
+  pointer-events: none;
+  border-radius: 0 0 3px 3px;
 }
-.t2-card {
-  border-color: rgba(0,204,122,0.38) !important;
-  box-shadow: 0 0 36px rgba(0,204,122,0.18), inset 0 1px 0 rgba(0,204,122,0.08) !important;
-}
+.t1-card { --pcat: #2B9FFF; }
+.t2-card { --pcat: #00CC7A; }
 .team-input-card:hover { transform: translateY(-6px); }
 
 .team-avatar-icon { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; }
@@ -961,34 +1024,55 @@ body {
 
 /* ── Team banner ── */
 .team-banner {
+  --pcat: #2B9FFF;
   width: 100%;
-  background: linear-gradient(135deg, rgba(43,159,255,0.14), rgba(43,159,255,0.04));
-  border: 1px solid rgba(43,159,255,0.38);
+  background:
+    radial-gradient(ellipse at 50% -5%, color-mix(in srgb, var(--pcat) 22%, transparent) 0%, transparent 60%),
+    linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
+  border: 1.5px solid rgba(255,255,255,0.07);
   color: var(--t1-color);
   font-family: 'Fredoka One', cursive; font-size: 22px;
-  text-align: center; padding: 12px 20px; border-radius: 14px;
-  box-shadow: 0 0 22px rgba(43,159,255,0.14);
+  text-align: center; padding: 12px 20px; border-radius: 20px;
+  position: relative; overflow: hidden;
   letter-spacing: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 6px 28px rgba(0,0,0,0.65),
+    0 0 28px color-mix(in srgb, var(--pcat) 16%, transparent),
+    0 0 0 1px rgba(0,0,0,0.3);
+}
+.team-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pcat), transparent);
+  opacity: 0.8;
+  pointer-events: none;
+  border-radius: 0 0 3px 3px;
 }
 .team-banner.t2-banner {
-  background: linear-gradient(135deg, rgba(0,204,122,0.14), rgba(0,204,122,0.04));
-  border-color: rgba(0,204,122,0.38);
+  --pcat: #00CC7A;
   color: var(--t2-color);
-  box-shadow: 0 0 22px rgba(0,204,122,0.14);
 }
 
 /* ── Holographic Question Card ── */
 .holo-card {
+  --pcat: #00C3FF;
   border-radius: var(--radius-lg);
   padding: 28px 28px 24px;
   width: 100%;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(0,195,255,0.22);
-  background: rgba(4,10,36,0.78);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 0 48px rgba(0,195,255,0.08), inset 0 1px 0 rgba(100,200,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.07);
+  background:
+    radial-gradient(ellipse at 50% -5%, color-mix(in srgb, var(--pcat) 20%, transparent) 0%, transparent 58%),
+    linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 6px 28px rgba(0,0,0,0.65),
+    0 0 42px color-mix(in srgb, var(--pcat) 16%, transparent),
+    0 0 0 1px rgba(0,0,0,0.3);
   animation: holoAppear 0.65s cubic-bezier(0.34,1.56,0.64,1);
 }
 @keyframes holoAppear {
@@ -1005,26 +1089,25 @@ body {
   );
   pointer-events: none; z-index: 1;
 }
-/* Animated top glow sweep */
+/* Top-edge colour strip — same as mcard */
 .holo-card::before {
   content: '';
-  position: absolute; top: 0; left: -100%; right: auto; bottom: auto;
-  width: 80%; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,195,255,0.7), transparent);
-  animation: holoSweep 4s linear infinite;
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pcat), transparent);
+  opacity: 0.82;
+  pointer-events: none;
+  border-radius: 0 0 3px 3px;
   z-index: 2;
-}
-@keyframes holoSweep {
-  0%   { left: -80%; }
-  100% { left: 180%; }
 }
 /* Corner accent */
 .holo-card::after {
   content: '';
   position: absolute; top: 0; left: 0;
   width: 40px; height: 40px;
-  border-top: 2px solid rgba(0,195,255,0.5);
-  border-left: 2px solid rgba(0,195,255,0.5);
+  border-top: 2px solid color-mix(in srgb, var(--pcat) 50%, transparent);
+  border-left: 2px solid color-mix(in srgb, var(--pcat) 50%, transparent);
   border-radius: 0 0 8px 0;
   pointer-events: none;
 }
@@ -1190,25 +1273,57 @@ body {
 
 .score-row { display: flex; gap: 12px; width: 100%; }
 .btn-pass, .btn-gotit {
-  flex: 1; border: none; border-radius: 16px;
+  flex: 1;
+  border-radius: 20px;
   font-family: 'Fredoka One', cursive; font-size: 22px;
-  padding: 16px; cursor: pointer; transition: all 0.2s;
+  padding: 16px; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1.5px solid rgba(255,255,255,0.07);
+}
+.btn-pass::before, .btn-gotit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 16px; right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pcat), transparent);
+  opacity: 0.8;
+  pointer-events: none;
+  border-radius: 0 0 3px 3px;
 }
 .btn-pass {
-  background: rgba(255,50,50,0.1);
-  border: 1px solid rgba(255,100,100,0.38);
+  --pcat: #FF4444;
+  background:
+    radial-gradient(ellipse at 50% -5%, color-mix(in srgb, var(--pcat) 22%, transparent) 0%, transparent 60%),
+    linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
   color: #FF7070;
-  box-shadow: 0 0 18px rgba(255,50,50,0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 6px 28px rgba(0,0,0,0.65),
+    0 0 22px color-mix(in srgb, var(--pcat) 16%, transparent),
+    0 0 0 1px rgba(0,0,0,0.3);
 }
 .btn-gotit {
-  background: rgba(0,255,150,0.1);
-  border: 1px solid rgba(0,255,150,0.38);
+  --pcat: #00FF96;
+  background:
+    radial-gradient(ellipse at 50% -5%, color-mix(in srgb, var(--pcat) 22%, transparent) 0%, transparent 60%),
+    linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
   color: var(--neon-green);
   flex: 1.6;
-  box-shadow: 0 0 18px rgba(0,255,150,0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 6px 28px rgba(0,0,0,0.65),
+    0 0 22px color-mix(in srgb, var(--pcat) 16%, transparent),
+    0 0 0 1px rgba(0,0,0,0.3);
 }
-.btn-pass:hover  { background: rgba(255,50,50,0.22); transform: translateY(-2px); box-shadow: 0 0 28px rgba(255,50,50,0.3); }
-.btn-gotit:hover { background: rgba(0,255,150,0.22); transform: translateY(-2px); box-shadow: 0 0 28px rgba(0,255,150,0.3); }
+.btn-pass:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 10px 36px rgba(0,0,0,0.72), 0 0 32px color-mix(in srgb, #FF4444 35%, transparent), 0 0 0 1px color-mix(in srgb, #FF4444 50%, transparent);
+}
+.btn-gotit:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 10px 36px rgba(0,0,0,0.72), 0 0 32px color-mix(in srgb, #00FF96 35%, transparent), 0 0 0 1px color-mix(in srgb, #00FF96 50%, transparent);
+}
 .btn-gotit.double-active {
   background: rgba(255,215,0,0.18);
   border-color: var(--neon-gold);
