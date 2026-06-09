@@ -3254,6 +3254,8 @@ function showGameIntro() {
   setTxt('intro-desc',     g.description);
   setTxt('intro-t1-name',  state.teams[0].name);
   setTxt('intro-t2-name',  state.teams[1].name);
+  const n1 = el('intro-t1-name'); if (n1) n1.style.color = state.teamCustom[0].color;
+  const n2 = el('intro-t2-name'); if (n2) n2.style.color = state.teamCustom[1].color;
   setTxt('intro-t1-score', state.teams[0].score);
   setTxt('intro-t2-score', state.teams[1].score);
   setTxt('world-icon',     '');
