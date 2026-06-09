@@ -10,8 +10,6 @@ export default function Home() {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>The Challenge!</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
       </Head>
 
       {/* Galaxy Background */}
@@ -144,7 +142,7 @@ export default function Home() {
       {/* SCREEN: MISSION SELECTION */}
       <div id="screen-mission-select" className="screen">
         <div className="screen-content screen-wide">
-          <div className="pick-banner glass-card" id="pick-banner">
+          <div className="pick-banner" id="pick-banner">
             <div className="pick-banner-left">
               <span className="pick-char" id="pick-char"></span>
               <div className="pick-banner-text">

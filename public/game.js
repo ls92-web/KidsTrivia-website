@@ -2737,9 +2737,10 @@ function _updatePickUI() {
   if (nameEl) nameEl.textContent = team.name;
   if (numEl)  numEl.textContent  = num;
   if (banner) {
-    banner.style.borderColor  = tc.color + '66';
-    banner.style.background   = `linear-gradient(135deg, ${tc.color}18, ${tc.color}06)`;
-    banner.style.boxShadow    = `0 0 28px ${tc.color}22`;
+    banner.style.setProperty('--pcat', tc.color);
+    banner.style.borderColor  = '';
+    banner.style.background   = '';
+    banner.style.boxShadow    = '';
     charEl.style.filter       = `drop-shadow(0 0 14px ${tc.color})`;
   }
 
