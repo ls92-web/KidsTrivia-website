@@ -290,7 +290,7 @@ body {
 
 .home-beacon {
   position: fixed;
-  top: 14px;
+  top: 28px;
   right: 28px;
   z-index: 9000;
   width: 27px;
