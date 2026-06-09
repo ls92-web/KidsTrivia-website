@@ -244,6 +244,24 @@ export default function Home() {
             <div className="qcard-header">
               <span className="qcard-emoji" id="qcard-emoji"></span>
               <span className="qcard-game" id="qcard-game">Mission</span>
+              <div className="card-icon-btns">
+                <button className="card-icon-btn card-icon-hint" id="hint-btn" onClick={() => window.showHint()} title="Hint">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M9 12.5c0 1.2.5 2.3 1.3 3H13.7c.8-.7 1.3-1.8 1.3-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <rect x="9.5" y="15.5" width="5" height="1.5" rx="0.75" fill="currentColor"/>
+                    <rect x="10" y="17" width="4" height="1.5" rx="0.75" fill="currentColor"/>
+                  </svg>
+                  <span>Hint</span>
+                </button>
+                <button className="card-icon-btn card-icon-reveal" id="reveal-btn" onClick={() => window.revealAnswer()} title="Reveal Answer">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="12" cy="12" rx="9" ry="5.5" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+                  </svg>
+                  <span>Reveal</span>
+                </button>
+              </div>
             </div>
             <div className="question-text" id="question-text">Question goes here...</div>
             <div id="answer-box" className="answer-box hidden">
@@ -252,24 +270,6 @@ export default function Home() {
             </div>
             <div id="hint-box" className="hint-box hidden">
               <div className="hint-inner" id="hint-text">Hint here</div>
-            </div>
-            <div className="card-icon-btns">
-              <button className="card-icon-btn card-icon-hint" id="hint-btn" onClick={() => window.showHint()} title="Hint">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M9 12.5c0 1.2.5 2.3 1.3 3H13.7c.8-.7 1.3-1.8 1.3-3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  <rect x="9.5" y="15.5" width="5" height="1.5" rx="0.75" fill="currentColor"/>
-                  <rect x="10" y="17" width="4" height="1.5" rx="0.75" fill="currentColor"/>
-                </svg>
-                <span>Hint</span>
-              </button>
-              <button className="card-icon-btn card-icon-reveal" id="reveal-btn" onClick={() => window.revealAnswer()} title="Reveal Answer">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <ellipse cx="12" cy="12" rx="9" ry="5.5" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
-                </svg>
-                <span>Reveal</span>
-              </button>
             </div>
             <div className="powerups-bar" id="powerups-bar">
               <button className="powerup-btn" id="pu-fifty" onClick={() => window.usePowerup('fifty')} title="50/50 — skip the hard part">
