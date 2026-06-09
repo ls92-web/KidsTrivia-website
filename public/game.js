@@ -3448,6 +3448,11 @@ function continueQuestion() {
   stopTimer();
   state.round++;
   const totalRounds = state.questionsPerTeam * 2;
+  // Re-enable answer buttons for the next question
+  const passBtn = document.querySelector('.btn-pass');
+  const gotitBtn = document.getElementById('gotit-btn');
+  if (passBtn)  { passBtn.disabled = false;  passBtn.style.opacity = ''; }
+  if (gotitBtn) { gotitBtn.disabled = false; gotitBtn.style.opacity = ''; }
   if (state.round >= totalRounds) {
     showGameResult();
   } else {
@@ -3459,6 +3464,12 @@ function continueQuestion() {
 function recordAnswer(correct) {
   stopTimer();
   const ti = state.teamIdx;
+
+  // Disable Pass and Got it! so only Continue can advance
+  const passBtn = document.querySelector('.btn-pass');
+  const gotitBtn = document.getElementById('gotit-btn');
+  if (passBtn)  { passBtn.disabled = true;  passBtn.style.opacity = '0.4'; }
+  if (gotitBtn) { gotitBtn.disabled = true; gotitBtn.style.opacity = '0.4'; }
 
   if (correct) {
     const pts = state.doublePts ? 20 : 10;
@@ -3477,18 +3488,6 @@ function recordAnswer(correct) {
   }
 
   updateTeamPanels();
-
-  state.round++;
-  const totalRounds = state.questionsPerTeam * 2;
-
-  setTimeout(() => {
-    if (state.round >= totalRounds) {
-      showGameResult();
-    } else {
-      state.teamIdx = state.round % 2;
-      showTeamSwitch();
-    }
-  }, correct ? 2000 : 900);
 }
 
 function showFeedback(msg, good) {
