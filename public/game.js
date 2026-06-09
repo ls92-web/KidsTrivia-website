@@ -2736,7 +2736,7 @@ function _updatePickUI() {
     bannerShipEl.innerHTML = getShipSVG(tc.rocketId, tc.color);
     bannerShipEl.style.filter = `drop-shadow(0 0 10px ${tc.color}88)`;
   }
-  if (nameEl) nameEl.textContent = team.name;
+  if (nameEl) { nameEl.textContent = team.name; nameEl.style.color = tc.color; }
   if (numEl)  numEl.textContent  = num;
   if (banner) {
     banner.style.setProperty('--pcat', tc.color);
