@@ -9,7 +9,7 @@
   <title>The Challenge!</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=38" />
+  <link rel="stylesheet" href="style.css?v=39" />
 </head>
 <body>
 
@@ -26,7 +26,7 @@
   <div id="char-react-overlay" class="char-react-overlay"></div>
 
   <!-- Fixed home beacon — top-right, always on top -->
-  <button class="home-beacon" id="home-beacon" onclick="goHome()" title="Back to base">
+  <button class="home-beacon" id="home-beacon" onclick="this.classList.add('clicked'); setTimeout(goHome, 220)" title="Back to base">
     <svg class="home-beacon-icon" viewBox="0 0 20 20" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
       <polygon points="10,2 18,9 2,9" fill="currentColor"/>
       <rect x="4" y="8.5" width="12" height="9" rx="1" fill="currentColor" opacity="0.85"/>
@@ -450,6 +450,6 @@
   <!-- Warp tunnel transition overlay -->
   <div id="warp-tunnel" class="warp-tunnel"></div>
 
-  <script src="game.js?v=38"></script>
+  <script src="game.js?v=39"></script>
 </body>
 </html>
