@@ -337,8 +337,6 @@ body {
 }
 .home-beacon.clicked,
 .home-beacon:active {
-  background: radial-gradient(circle at 36% 28%, #88F0AA, #22C060 52%, #0E7030);
-  animation: hb-green-flash 0.35s ease-out forwards;
   transform: scale(0.93);
 }
 
