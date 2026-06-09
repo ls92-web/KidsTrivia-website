@@ -2277,9 +2277,16 @@ function getPlanetSVG(id, size) {
 
 'family-knowledge': `<svg viewBox="0 0 100 100" width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg">
   <defs>
+    <style>
+      @keyframes fk-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+      @keyframes fk-twinkle{0%,100%{opacity:0.2;transform:scale(0.6)}55%{opacity:1;transform:scale(1.35)}}
+      @keyframes fk-glow{0%,100%{opacity:0.3}55%{opacity:0.82}}
+    </style>
     <clipPath id="fk-c-${s}"><circle cx="50" cy="50" r="46"/></clipPath>
     <radialGradient id="fk-sh-${s}" cx="66%" cy="65%" r="62%"><stop offset="0%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="0.52"/></radialGradient>
     <radialGradient id="fk-hi-${s}" cx="30%" cy="28%" r="48%"><stop offset="0%" stop-color="#fff" stop-opacity="0.22"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="fk-kg-${s}" cx="50%" cy="44%" r="52%"><stop offset="0%" stop-color="#FFE566" stop-opacity="0.72"/><stop offset="100%" stop-color="#FFE566" stop-opacity="0"/></radialGradient>
+    <filter id="fk-sf-${s}"><feGaussianBlur stdDeviation="2.5"/></filter>
   </defs>
   <circle cx="50" cy="50" r="46" fill="#9A6200"/>
   <ellipse cx="62" cy="66" rx="28" ry="20" fill="#B87A10" clip-path="url(#fk-c-${s})"/>
@@ -2287,10 +2294,27 @@ function getPlanetSVG(id, size) {
   <ellipse cx="58" cy="32" rx="14" ry="9" fill="#D49A30" clip-path="url(#fk-c-${s})" transform="rotate(8,58,32)"/>
   <ellipse cx="72" cy="50" rx="10" ry="14" fill="#B07010" clip-path="url(#fk-c-${s})"/>
   <ellipse cx="26" cy="60" rx="9" ry="6" fill="#C08020" clip-path="url(#fk-c-${s})"/>
+  <ellipse cx="50" cy="51" rx="22" ry="16" fill="url(#fk-kg-${s})" clip-path="url(#fk-c-${s})" style="animation:fk-glow 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center"/>
   <ellipse cx="50" cy="8" rx="28" ry="13" fill="#F5F0E0" clip-path="url(#fk-c-${s})"/>
   <ellipse cx="36" cy="26" rx="16" ry="4" fill="#fff" opacity="0.68" clip-path="url(#fk-c-${s})" transform="rotate(-8,36,26)"/>
   <ellipse cx="62" cy="46" rx="13" ry="3" fill="#fff" opacity="0.55" clip-path="url(#fk-c-${s})"/>
   <ellipse cx="33" cy="57" rx="14" ry="3" fill="#fff" opacity="0.45" clip-path="url(#fk-c-${s})" transform="rotate(5,33,57)"/>
+  <g clip-path="url(#fk-c-${s})">
+    <circle cx="50" cy="37" r="3.5" fill="#FFE566" filter="url(#fk-sf-${s})" style="animation:fk-twinkle 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="50" cy="37" r="1.8" fill="#FFFAAA" style="animation:fk-twinkle 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="36" cy="41" r="2.2" fill="#FFD700" filter="url(#fk-sf-${s})" style="animation:fk-twinkle 2.8s ease-in-out infinite 0.55s;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="36" cy="41" r="1.1" fill="#FFE566" style="animation:fk-twinkle 2.8s ease-in-out infinite 0.55s;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="64" cy="41" r="2.2" fill="#FFD700" filter="url(#fk-sf-${s})" style="animation:fk-twinkle 2.5s ease-in-out infinite 1.1s;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="64" cy="41" r="1.1" fill="#FFE566" style="animation:fk-twinkle 2.5s ease-in-out infinite 1.1s;transform-box:fill-box;transform-origin:center"/>
+  </g>
+  <g clip-path="url(#fk-c-${s})" style="animation:fk-bob 3s ease-in-out infinite;transform-box:fill-box;transform-origin:50px 57px">
+    <circle cx="35" cy="48" r="5.5" fill="#6A3800"/>
+    <rect x="31.5" y="53.5" width="7" height="11" rx="2.5" fill="#6A3800"/>
+    <circle cx="50" cy="51" r="4" fill="#5A2E00"/>
+    <rect x="47.2" y="55" width="5.8" height="9" rx="2" fill="#5A2E00"/>
+    <circle cx="65" cy="48" r="5.5" fill="#6A3800"/>
+    <rect x="61.5" y="53.5" width="7" height="11" rx="2.5" fill="#6A3800"/>
+  </g>
   <circle cx="50" cy="50" r="46" fill="url(#fk-sh-${s})"/>
   <circle cx="50" cy="50" r="46" fill="url(#fk-hi-${s})"/>
   <circle cx="50" cy="50" r="46" fill="none" stroke="#FFD700" stroke-width="4" opacity="0.35"/>
@@ -3905,9 +3929,16 @@ function getMissionIconSVG(gameId, size) {
 
     'family-knowledge':`<svg viewBox="0 0 64 64" width="${s}" height="${h}" xmlns="http://www.w3.org/2000/svg">
   <defs>
+    <style>
+      @keyframes fki-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+      @keyframes fki-twinkle{0%,100%{opacity:0.2;transform:scale(0.6)}55%{opacity:1;transform:scale(1.35)}}
+      @keyframes fki-glow{0%,100%{opacity:0.3}55%{opacity:0.82}}
+    </style>
     <clipPath id="fk-ic-${s}"><circle cx="32" cy="32" r="30"/></clipPath>
     <radialGradient id="fk-ish-${s}" cx="66%" cy="65%" r="62%"><stop offset="0%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="0.52"/></radialGradient>
     <radialGradient id="fk-ihi-${s}" cx="30%" cy="28%" r="48%"><stop offset="0%" stop-color="#fff" stop-opacity="0.22"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="fk-ikg-${s}" cx="50%" cy="44%" r="52%"><stop offset="0%" stop-color="#FFE566" stop-opacity="0.72"/><stop offset="100%" stop-color="#FFE566" stop-opacity="0"/></radialGradient>
+    <filter id="fk-isf-${s}"><feGaussianBlur stdDeviation="1.5"/></filter>
   </defs>
   <circle cx="32" cy="32" r="30" fill="#9A6200"/>
   <ellipse cx="40" cy="42" rx="18" ry="13" fill="#B87A10" clip-path="url(#fk-ic-${s})"/>
@@ -3915,10 +3946,27 @@ function getMissionIconSVG(gameId, size) {
   <ellipse cx="37" cy="21" rx="9" ry="6" fill="#D49A30" clip-path="url(#fk-ic-${s})" transform="rotate(8,37,21)"/>
   <ellipse cx="46" cy="32" rx="6" ry="9" fill="#B07010" clip-path="url(#fk-ic-${s})"/>
   <ellipse cx="17" cy="39" rx="6" ry="4" fill="#C08020" clip-path="url(#fk-ic-${s})"/>
+  <ellipse cx="32" cy="33" rx="14" ry="10" fill="url(#fk-ikg-${s})" clip-path="url(#fk-ic-${s})" style="animation:fki-glow 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center"/>
   <ellipse cx="32" cy="5" rx="18" ry="8" fill="#F5F0E0" clip-path="url(#fk-ic-${s})"/>
   <ellipse cx="23" cy="17" rx="10" ry="3" fill="#fff" opacity="0.68" clip-path="url(#fk-ic-${s})" transform="rotate(-8,23,17)"/>
   <ellipse cx="40" cy="30" rx="8" ry="2" fill="#fff" opacity="0.55" clip-path="url(#fk-ic-${s})"/>
   <ellipse cx="22" cy="37" rx="9" ry="2" fill="#fff" opacity="0.45" clip-path="url(#fk-ic-${s})" transform="rotate(5,22,37)"/>
+  <g clip-path="url(#fk-ic-${s})">
+    <circle cx="32" cy="24" r="2.2" fill="#FFE566" filter="url(#fk-isf-${s})" style="animation:fki-twinkle 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="32" cy="24" r="1.1" fill="#FFFAAA" style="animation:fki-twinkle 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="23" cy="26" r="1.4" fill="#FFD700" filter="url(#fk-isf-${s})" style="animation:fki-twinkle 2.8s ease-in-out infinite 0.55s;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="23" cy="26" r="0.7" fill="#FFE566" style="animation:fki-twinkle 2.8s ease-in-out infinite 0.55s;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="41" cy="26" r="1.4" fill="#FFD700" filter="url(#fk-isf-${s})" style="animation:fki-twinkle 2.5s ease-in-out infinite 1.1s;transform-box:fill-box;transform-origin:center"/>
+    <circle cx="41" cy="26" r="0.7" fill="#FFE566" style="animation:fki-twinkle 2.5s ease-in-out infinite 1.1s;transform-box:fill-box;transform-origin:center"/>
+  </g>
+  <g clip-path="url(#fk-ic-${s})" style="animation:fki-bob 3s ease-in-out infinite;transform-box:fill-box;transform-origin:32px 36px">
+    <circle cx="22" cy="31" r="3.5" fill="#6A3800"/>
+    <rect x="20" y="34.5" width="4.5" height="7" rx="1.5" fill="#6A3800"/>
+    <circle cx="32" cy="33" r="2.5" fill="#5A2E00"/>
+    <rect x="30.2" y="35.5" width="3.8" height="5.5" rx="1.2" fill="#5A2E00"/>
+    <circle cx="42" cy="31" r="3.5" fill="#6A3800"/>
+    <rect x="40" y="34.5" width="4.5" height="7" rx="1.5" fill="#6A3800"/>
+  </g>
   <circle cx="32" cy="32" r="30" fill="url(#fk-ish-${s})"/>
   <circle cx="32" cy="32" r="30" fill="url(#fk-ihi-${s})"/>
   <circle cx="32" cy="32" r="30" fill="none" stroke="#FFD700" stroke-width="2.5" opacity="0.35"/>
