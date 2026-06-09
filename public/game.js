@@ -3444,6 +3444,18 @@ function revealAnswer() {
 }
 
 // ─── RECORD ANSWER ─────────────────────────────────────
+function continueQuestion() {
+  stopTimer();
+  state.round++;
+  const totalRounds = state.questionsPerTeam * 2;
+  if (state.round >= totalRounds) {
+    showGameResult();
+  } else {
+    state.teamIdx = state.round % 2;
+    showTeamSwitch();
+  }
+}
+
 function recordAnswer(correct) {
   stopTimer();
   const ti = state.teamIdx;

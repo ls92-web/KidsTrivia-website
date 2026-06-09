@@ -1282,7 +1282,7 @@ body {
 }
 
 .score-row { display: flex; gap: 12px; width: 100%; }
-.btn-pass, .btn-gotit {
+.btn-pass, .btn-gotit, .btn-continue {
   flex: 1;
   border-radius: 20px;
   font-family: 'Fredoka One', cursive; font-size: 22px;
@@ -1291,7 +1291,7 @@ body {
   transition: transform 0.2s, box-shadow 0.2s;
   border: 1.5px solid rgba(255,255,255,0.07);
 }
-.btn-pass::before, .btn-gotit::before {
+.btn-pass::before, .btn-gotit::before, .btn-continue::before {
   content: '';
   position: absolute;
   top: 0; left: 16px; right: 16px;
@@ -1340,6 +1340,22 @@ body {
   color: var(--neon-gold);
   box-shadow: 0 0 24px rgba(255,215,0,0.4);
   animation: puGlow 0.8s infinite;
+}
+.btn-continue {
+  --pcat: #7B5FFF;
+  background:
+    radial-gradient(ellipse at 50% -5%, color-mix(in srgb, var(--pcat) 22%, transparent) 0%, transparent 60%),
+    linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
+  color: #A990FF;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 6px 28px rgba(0,0,0,0.65),
+    0 0 22px color-mix(in srgb, var(--pcat) 16%, transparent),
+    0 0 0 1px rgba(0,0,0,0.3);
+}
+.btn-continue:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 10px 36px rgba(0,0,0,0.72), 0 0 32px color-mix(in srgb, #7B5FFF 35%, transparent), 0 0 0 1px color-mix(in srgb, #7B5FFF 50%, transparent);
 }
 
 /* ===== SIBLING CHALLENGE ===== */
@@ -2008,7 +2024,7 @@ body {
   .gresult-scores  { flex-direction: column; }
   .final-scores    { flex-direction: column; align-items: center; }
   .score-row       { flex-direction: column; }
-  .btn-pass, .btn-gotit { flex: none; width: 100%; }
+  .btn-pass, .btn-gotit, .btn-continue { flex: none; width: 100%; }
   .question-text   { font-size: 17px; }
   .winner-name     { font-size: 46px; }
   .team-panels     { gap: 6px; }
