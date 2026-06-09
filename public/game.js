@@ -2328,6 +2328,8 @@ function getPlanetSVG(id, size) {
     <line x1="55" y1="58" x2="57" y2="58" stroke="#2E1200" stroke-width="3" stroke-linecap="round"/>
     <circle cx="50" cy="47" r="7.5" fill="#4A2000"/>
     <!-- === Parent RIGHT (mom, dress) === -->
+    <line x1="65" y1="65" x2="63" y2="75" stroke="#3A1800" stroke-width="4" stroke-linecap="round"/>
+    <line x1="73" y1="65" x2="75" y2="75" stroke="#3A1800" stroke-width="4" stroke-linecap="round"/>
     <path d="M63,51 L75,51 L78,65 L60,65 Z" fill="#3A1800"/>
     <line x1="63" y1="55" x2="57" y2="58" stroke="#3A1800" stroke-width="3.5" stroke-linecap="round"/>
     <line x1="75" y1="55" x2="82" y2="60" stroke="#3A1800" stroke-width="3.5" stroke-linecap="round"/>
@@ -3999,6 +4001,8 @@ function getMissionIconSVG(gameId, size) {
     <line x1="35" y1="37" x2="37" y2="37" stroke="#2E1200" stroke-width="2" stroke-linecap="round"/>
     <circle cx="32" cy="30" r="4.8" fill="#4A2000"/>
     <!-- Parent RIGHT (dress) -->
+    <line x1="41.5" y1="41.5" x2="40" y2="47" stroke="#3A1800" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="46.5" y1="41.5" x2="48" y2="47" stroke="#3A1800" stroke-width="2.5" stroke-linecap="round"/>
     <path d="M40,32.5 L48,32.5 L50,41.5 L38,41.5 Z" fill="#3A1800"/>
     <line x1="40" y1="35.5" x2="37" y2="37" stroke="#3A1800" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="48" y1="35.5" x2="52" y2="38.5" stroke="#3A1800" stroke-width="2.5" stroke-linecap="round"/>
