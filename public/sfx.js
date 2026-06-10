@@ -237,15 +237,50 @@ const SFX = (() => {
 
 
   // ══════════════════════════════════════════════════════════════════════════
+  //  7 · ROCKET BOOSTER LAUNCH
+  //  The "Launch Mission!" button. Sounds like igniting rocket engines —
+  //  a powerful low rumble that builds, surges, and blasts off.
+  // ══════════════════════════════════════════════════════════════════════════
+  function rocketBoost() {
+    const out = bus(0.72);
+
+    // ① Engine ignition rumble — low noise building from nothing
+    noise(0,    0.30, 60,  300,  'lowpass',  1.0, 0.18, out);
+    noise(0.05, 0.45, 100, 800,  'lowpass',  0.8, 0.25, out);
+
+    // ② Thrust surge — mid noise burst as boosters fire
+    noise(0.18, 0.55, 250, 3500, 'bandpass', 1.4, 0.32, out);
+
+    // ③ Deep bass pulse — the "boom" of engines igniting
+    tone('sine', 55,  0,    0.55, 0.45, out, { freqEnd: 35,  attack: 0.015 });
+    tone('sine', 80,  0.05, 0.50, 0.30, out, { freqEnd: 50,  attack: 0.010 });
+
+    // ④ Rising engine whine — pitch climbing as thrust increases
+    tone('sawtooth', 120, 0.10, 0.65, 0.12, out, { freqEnd: 480, attack: 0.02 });
+    tone('sawtooth', 124, 0.12, 0.62, 0.06, out, { freqEnd: 490, attack: 0.02, detune: 12 });
+
+    // ⑤ High-frequency exhaust hiss — air blast on liftoff
+    noise(0.35, 0.45, 3000, 8000, 'highpass', 1.2, 0.14, out);
+
+    // ⑥ Blast-off sparkle — light trail as the rocket clears the pad
+    [1046.50, 1318.51, 2093.00].forEach((f, i) => {
+      ping(f, 0.55 + i * 0.06, 0.30, 0.08, out);
+    });
+  }
+
+
+  // ══════════════════════════════════════════════════════════════════════════
   //  PUBLIC API
   // ══════════════════════════════════════════════════════════════════════════
-  return { btnClick, correct, wrong, categorySelect, missionComplete, teamSwitch };
+  return { btnClick, correct, wrong, categorySelect, missionComplete, teamSwitch, rocketBoost };
 })();
 
 
 // ── Global button click sound (capture phase — fires before React handlers) ──
 document.addEventListener('click', function (e) {
-  if (e.target.closest('button') && typeof SFX !== 'undefined') {
-    SFX.btnClick();
-  }
+  const btn = e.target.closest('button');
+  if (!btn || typeof SFX === 'undefined') return;
+  // Buttons with data-sfx="skip" handle their own sound
+  if (btn.dataset.sfx === 'skip') return;
+  SFX.btnClick();
 }, true);
