@@ -3745,7 +3745,57 @@ function newCrews() {
   if (t2) t2.value = '';
   document.getElementById('setup-phase-0').style.display   = '';
   document.getElementById('setup-phase-custom').style.display = 'none';
+  _refreshNameSuggestions();
   showScreen('screen-teams');
+}
+
+// ─── TEAM NAME SUGGESTIONS ─────────────────────────────────────────────────────
+const _NAME_POOL = [
+  // Space crew titles
+  'Astro Aces', 'Comet Chasers', 'Cosmic Rays', 'Dark Matter', 'Event Horizon',
+  'Galactic Guard', 'Gravity Defiers', 'Interstellar', 'Light Speeders', 'Lunar Legends',
+  'Meteor Squad', 'Milky Way Crew', 'Mission Control', 'Moon Walkers', 'Nebula Knights',
+  'Nova Squad', 'Orbit Heroes', 'Planet Hoppers', 'Pulsar Pirates', 'Quasar Quest',
+  'Rocket Riders', 'Solar Flares', 'Star Captains', 'Starship Crew', 'Stardust',
+  'Supernova', 'Void Voyagers', 'Warp Jumpers', 'Zero Gravity', 'Aurora Squad',
+  'Blackhole Busters', 'Cosmic Crusaders', 'Deep Space', 'Exo Explorers', 'Flux Riders',
+  'Galaxy Scouts', 'Hyperspace', 'Ion Blasters', 'Jupiter Force', 'Kuiper Crew',
+  'Laser Legends', 'Magnetar', 'Neutron Stars', 'Photon Fleet', 'Quantum Leap',
+  'Redshift Crew', 'Saturn Rings', 'Tidal Force', 'Ultraviolet', 'Wormhole Gang',
+  // Character-inspired
+  'Alien Alliance', 'Bot Brigade', 'Commander Pack', 'Dino Pilots', 'Dragon Riders',
+  'Hero League', 'Princess Guard', 'Pirate Fleet', 'Robot Rebellion', 'Space Cat Clan',
+  'Space Dog Pack', 'Scientist Society', 'Wizard Circle', 'Cosmic Knights', 'Phantom Crew',
+  // Mission-inspired
+  'Art Asteroids', 'Dilemma Drifters', 'Enigma Elite', 'Logic Lords', 'Memory Masters',
+  'Nebula Riddlers', 'Nova Learners', 'Pixel Pilots', 'Quiz Quasars', 'Riddle Rangers',
+  'Speed Demons', 'Story Sages', 'Jungle Cadets', 'Dragon Tamers', 'Paint Nebula',
+  // Fun space-flavoured
+  'Big Bang', 'Cosmic Boom', 'Eclipse Gang', 'Frozen Orbit', 'Gravity Wells',
+  'Laser Beams', 'Moon Dust', 'Neon Nebula', 'Orbit Breakers', 'Parallel Crew',
+  'Quantum Squad', 'Rocket Fuel', 'Space Jam', 'Star Forge', 'Titan Force',
+  'Ultra Crew', 'Velocity', 'Warp Core', 'X-Ray Crew', 'Zenith Squad',
+];
+
+function _refreshNameSuggestions() {
+  const pool    = _NAME_POOL.slice(); // copy
+  // Shuffle
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  // Pick 4 for each team (non-overlapping)
+  const t1Names = pool.slice(0, 4);
+  const t2Names = pool.slice(4, 8);
+
+  [1, 2].forEach(team => {
+    const el = document.getElementById(`name-sugg-${team}`);
+    if (!el) return;
+    const names = team === 1 ? t1Names : t2Names;
+    el.innerHTML = names.map(n =>
+      `<span onclick="window.setName(${team},'${n}')">${n}</span>`
+    ).join('');
+  });
 }
 
 // ─── ADD SHAKE KEYFRAME VIA JS ─────────────────────────
@@ -4548,6 +4598,8 @@ function _gameInit() {
   // Apply team colors to avatar icons
   if (np1) np1.style.filter = `drop-shadow(0 0 10px ${state.teamCustom[0].color})`;
   if (np2) np2.style.filter = `drop-shadow(0 0 10px ${state.teamCustom[1].color})`;
+  // Seed name suggestions on first load
+  _refreshNameSuggestions();
 }
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', _gameInit);

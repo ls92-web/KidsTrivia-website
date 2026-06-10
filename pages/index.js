@@ -83,24 +83,14 @@ export default function Home() {
                 <div className="team-avatar-icon" id="name-prev-1"></div>
                 <label>Team 1</label>
                 <input type="text" id="team1-input" className="team-name-input t1-input" placeholder="Enter name..." maxLength={15} />
-                <div className="name-suggestions">
-                  <span onClick={() => window.setName(1,'The Stars')}>The Stars</span>
-                  <span onClick={() => window.setName(1,'Thunderbolts')}>Thunderbolts</span>
-                  <span onClick={() => window.setName(1,'Lions')}>Lions</span>
-                  <span onClick={() => window.setName(1,'Rockets')}>Rockets</span>
-                </div>
+                <div className="name-suggestions" id="name-sugg-1"></div>
               </div>
               <div className="vs-circle">VS</div>
               <div className="team-input-card t2-card glass-card">
                 <div className="team-avatar-icon" id="name-prev-2"></div>
                 <label>Team 2</label>
                 <input type="text" id="team2-input" className="team-name-input t2-input" placeholder="Enter name..." maxLength={15} />
-                <div className="name-suggestions">
-                  <span onClick={() => window.setName(2,'Dragons')}>Dragons</span>
-                  <span onClick={() => window.setName(2,'Dolphins')}>Dolphins</span>
-                  <span onClick={() => window.setName(2,'Pandas')}>Pandas</span>
-                  <span onClick={() => window.setName(2,'Wizards')}>Wizards</span>
-                </div>
+                <div className="name-suggestions" id="name-sugg-2"></div>
               </div>
             </div>
             <button className="btn-primary btn-large" onClick={() => window.proceedToCustomize()}>CREATE YOUR IDENTITY →</button>
