@@ -50,7 +50,7 @@ export default function Home() {
             <div className="step-item"><span className="step-num">3</span> Travel through the galaxy!</div>
             <div className="step-item bonus-step"><span className="bonus-star-icon"></span> Sibling Challenges = BONUS points!</div>
           </div>
-          <button className="btn-primary btn-huge pulse-btn" data-sfx="skip" onClick={() => { if (window.SFX) window.SFX.rocketBoost(); window.showScreen('screen-teams'); }}>
+          <button className="btn-primary btn-huge pulse-btn" onClick={() => window.showScreen('screen-teams')}>
             <span className="btn-rocket-icon"></span> LAUNCH MISSION!
           </button>
           <button className="scores-btn" onClick={() => window.showLeaderboard()}><span className="btn-trophy-icon"></span> Mission Records</button>
