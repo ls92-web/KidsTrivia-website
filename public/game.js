@@ -3912,6 +3912,16 @@ const _EMOJI_MAP = {
   'moving day':'📦','buzz wings':'🚀','grand ship':'🚢',
   'leaf cutter':'🌿','ant':'🐜','penalty box':'⬛','goalie mask':'😷',
   'happy face':'😊','alien':'👽','ice':'❄️','snow':'❄️',
+  // Previously missing tokens
+  'frozen kingdom':'❄️🏰',
+  'jazz music':'🎷🎵',
+  'new orleans':'🎺🌆',
+  'pitcher':'🤾⚾',
+  'robot':'🤖',
+  'trash planet':'🗑️🌍',
+  'witch oven':'🧙‍♀️🔥',
+  'beds':'🛏️',
+  'just right':'✅',
 };
 
 function _renderEmojiQuestion(rawText) {
