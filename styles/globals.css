@@ -1620,11 +1620,11 @@ body {
 }
 .pick-team-name {
   font-family: 'Fredoka One', cursive;
-  font-size: 22px;
+  font-size: 27px;
   color: white;
 }
 .pick-instruction {
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 700;
   color: rgba(160,200,255,0.8);
 }
@@ -1665,7 +1665,7 @@ body {
   margin: 0;
 }
 .msel-sub {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   color: rgba(140,190,255,0.75);
   text-align: center;
@@ -1794,10 +1794,10 @@ body {
 /* Category chip */
 .mcard-cat-chip {
   margin: 4px 12px 0;
-  padding: 2px 10px;
+  padding: 3px 10px;
   border-radius: 50px;
   border: 1px solid;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.8px;
@@ -1808,7 +1808,7 @@ body {
 /* Mission name */
 .mcard-name {
   font-family: 'Fredoka One', cursive;
-  font-size: 14px;
+  font-size: 18px;
   color: white;
   padding: 0 12px;
   line-height: 1.2;
@@ -1821,13 +1821,13 @@ body {
   gap: 5px;
   padding: 0 12px;
 }
-.mcard-stars { font-size: 11px; letter-spacing: 1px; }
-.mcard-diff  { font-size: 10px; font-weight: 800; color: rgba(180,210,255,0.7); }
-.mcard-age   { font-size: 10px; color: rgba(140,180,255,0.55); font-weight: 700; }
+.mcard-stars { font-size: 13px; letter-spacing: 1px; }
+.mcard-diff  { font-size: 13px; font-weight: 800; color: rgba(180,210,255,0.7); }
+.mcard-age   { font-size: 13px; color: rgba(140,180,255,0.55); font-weight: 700; }
 
 /* Type */
 .mcard-type {
-  font-size: 10px;
+  font-size: 13px;
   color: rgba(120,170,255,0.65);
   padding: 0 12px;
   font-weight: 700;
@@ -1839,9 +1839,9 @@ body {
   margin: 6px 12px 0;
   border: 1px solid;
   border-radius: 12px;
-  padding: 7px 10px;
+  padding: 8px 12px;
   font-family: 'Fredoka One', cursive;
-  font-size: 12px;
+  font-size: 15px;
   cursor: pointer;
   transition: filter 0.2s, transform 0.15s;
   backdrop-filter: blur(8px);
@@ -2039,7 +2039,7 @@ body {
 }
 @media (max-width: 580px) {
   .mission-galaxy-grid { grid-template-columns: repeat(2, 1fr); }
-  .msel-title { font-size: 26px; }
+  .msel-title { font-size: 28px; }
   .pick-slots-row { flex-wrap: wrap; }
 }
 
@@ -2233,7 +2233,7 @@ body {
 
 #screen-mission-select .msel-title {
   flex-shrink: 0;
-  font-size: 22px;
+  font-size: 32px;
   letter-spacing: 0.18em;
   text-align: center;
   margin: 4px 0 2px;
@@ -2391,7 +2391,7 @@ body {
 }
 .pl-name {
   font-family: 'Fredoka One', cursive;
-  font-size: 12px;
+  font-size: 15px;
   color: var(--pglow);
   text-shadow: 0 0 14px var(--pglow), 0 1px 5px rgba(0,0,0,0.9);
   letter-spacing: 0.06em;
@@ -2399,7 +2399,7 @@ body {
   display: block;
 }
 .pl-game {
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 800;
   color: rgba(180,220,255,0.65);
   letter-spacing: 0.04em;
