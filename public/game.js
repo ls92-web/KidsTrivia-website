@@ -3346,7 +3346,12 @@ function showQuestion() {
   // Question card
   document.getElementById('qcard-emoji').innerHTML = getMissionIconSVG(g.id, 32);
   document.getElementById('qcard-game').textContent  = g.name;
-  document.getElementById('question-text').textContent = _cleanQ(q.q);
+  const _qEl = document.getElementById('question-text');
+  if (g.id === 'emoji-stories') {
+    _qEl.innerHTML = _renderEmojiQuestion(q.q);
+  } else {
+    _qEl.textContent = _cleanQ(q.q);
+  }
 
   // Reset answer/hint
   document.getElementById('answer-box').classList.add('hidden');
@@ -3762,6 +3767,117 @@ function newCrews() {
 // Strip leading emoji/symbols from question text for display
 function _cleanQ(str) {
   return (str||'').replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27FF}\u{2300}-\u{23FF}\u{1F300}-\u{1F9FF}️⃣‍\s]+/gu,'').trim();
+}
+
+// ─── Emoji Stories: placeholder → emoji map ───────────────────────────────────
+const _EMOJI_MAP = {
+  // Characters
+  'girl':'👧','boy':'👦','prince':'🤴','princess':'👸','king':'👑','king and queen':'🤴👸',
+  'baby':'👶','old man':'👴','soldier':'💂','emperor':'👑','three uncles':'👴👴👴',
+  'brother':'👦','sister':'👧','two sisters':'👭','three girls':'👧👧👧','lost boys':'👦',
+  'cobbler':'👞','british boy':'👦🇬🇧','boy wizard':'🧙‍♂️','boy scout':'🎒',
+  // Animals
+  'wolf':'🐺','big bad wolf':'🐺','wolf pack':'🐺🐺','three pigs':'🐷🐷🐷',
+  'bear':'🐻','small bear':'🐻','three bears':'🐻🐻🐻','panther':'🐆',
+  'lion cub':'🦁','gorillas':'🦍','apes':'🦍','raised by apes':'🦍','raised by wolves':'🐺',
+  'fish':'🐟','clownfish dad':'🐠','blue fish':'🐟','frog':'🐸',
+  'duck':'🦆','ugly duck':'🦆','beautiful swan':'🦢','mermaid':'🧜‍♀️',
+  'pelican':'🦅','crab':'🦀','whale':'🐋','cricket':'🦗','cricket guide':'🦗',
+  'fox':'🦊','dog':'🐕','gingerbread man':'🍪','ant colony':'🐜',
+  'grasshopper villain':'🦗😈','circus bugs':'🎪🐛','tiny people':'🧝',
+  // Clothing & accessories
+  'red hood':'🔴','glass slipper':'👠','big hat':'🎩','sneakers':'👟',
+  'white gloves':'🥊','silver shoes':'👠','glove':'🧤','invisible cloak':'🫥',
+  'invisible clothes':'🫥','masks':'🎭',
+  // Objects
+  'basket':'🧺','suitcase':'🧳','sandwich':'🥪','apple':'🍎','pea':'🟢',
+  'magic lamp':'🪔','wand':'🪄','spell':'🪄','broomstick':'🧹',
+  'bricks':'🧱','puppet':'🪆','wooden puppet strings':'🪆','spinning wheel':'🌀',
+  'enchanted rose':'🌹','magic mirror':'🪞','breadcrumbs':'🍞','golden ball':'🟡',
+  'baton':'🥉','puck':'🏒','hockey stick':'🥍','boxing ring':'🥊','bell':'🔔',
+  'championship belt':'🏆','bat':'⚾','ball':'⚾','racket':'🎾','net':'🎾',
+  'small green ball':'🎾','hoop':'🏀','round ball':'⚽','goal net':'🥅',
+  'cooking pot':'🍲','shrink ray':'🔫','wand':'🪄','lightsaber':'⚔️',
+  'porridge':'🥣','ice cream':'🍦','pizza truck':'🚕',
+  // Places & settings
+  'forest':'🌲','jungle':'🌴','pond':'🪷','ocean':'🌊','river':'🌊',
+  'savanna':'🌾','bayou':'🌿','coral reef':'🪸','grass court':'🌿',
+  'tall tower':'🗼','house':'🏠','grandmother house':'🏠','old house':'🏚️',
+  'forest cottage':'🏡','ice castle':'🏰❄️','beast castle':'🏰',
+  'candy house':'🍬🏠','emerald city':'💚🏙️','pride rock':'🪨',
+  'train station':'🚉','paris':'🗼','fancy restaurant':'🍽️','magic school':'🏫',
+  'underground lake':'🏞️','scare factory':'🏭','living suburb':'🏘️',
+  'diamond field':'💎','oval track':'🏃','ice rink':'⛸️','court':'🏟️',
+  'boxing ring':'🥊','swimming pool':'🏊','child bedroom':'🛏️',
+  'park':'🌳','south america':'🌎',
+  // Concepts & actions
+  'blowing':'💨','flying':'✈️','climbing':'🧗','running':'🏃','eating':'😋',
+  'eat':'😋','kiss':'💋','sleeping':'😴','growing up':'📈','transformation':'✨',
+  'fairy dust':'✨','three wishes':'✨✨✨','let it go':'🎤','never grow up':'🙅',
+  'love story':'💕','love breaks curse':'💕','true love kiss':'💋❤️',
+  'curse':'😈','friendship':'🤝','adventure':'🗺️','search':'🔍',
+  'lost':'❓','flying carpet':'🪁','rope swinging':'🪢',
+  'secret identity':'🕵️','baby fire powers':'🔥👶','slam dunk':'⬆️🏀',
+  'dribble':'🏃','kick':'🦵','home run':'🏃💨','fast skating':'⛸️💨',
+  'hand off':'🤝','sprint':'💨','relay exchange zone':'🔄','flip turn':'🔄',
+  'stand up':'✊','harvest':'🌾','power':'⚡','screaming children':'😱',
+  'child shouts truth':'👦📢','left jab':'🥊','anyone can cook':'👨‍🍳',
+  'shoes made':'👟✨','morning surprise':'🌅','run run as fast as you can':'🏃💨',
+  'infinity and beyond':'♾️','wish':'⭐','secret revealed':'🔍',
+  'many mattresses':'🛏️🛏️','hundred years':'💤💤','short memory':'🧠❓',
+  'ocean journey':'🌊🗺️',
+  // Characters (named)
+  'genie':'🧞','villain':'😈','friendly ghost':'👻',
+  'superhero family':'🦸‍♀️🦸‍♂️','iron man':'🦾','green giant':'💚',
+  'thunderstorm god':'⚡🔨','archer':'🏹','black spy':'🕵️',
+  'twelve dancing princesses':'👸💃','young chef rat':'🐀👨‍🍳',
+  'toy cowboy':'🤠','toy astronaut':'👨‍🚀','buzz lightyear':'👨‍🚀🚀',
+  'food critic':'📝','tailors':'🪡',
+  // Nature
+  'snowflake':'❄️','sun':'☀️','moon':'🌙','plant':'🌱','waterfall':'💦',
+  'twin suns':'☀️☀️','circle':'⭕',
+  // Transport
+  'pirate ship':'🏴‍☠️','spaceship':'🚀','rocket':'🚀','pumpkin carriage':'🎃🚗',
+  'flying carpet':'🛸','floating house':'🏠🎈','bicycle':'🚲',
+  // Misc
+  'midnight clock':'🕛','long hair':'👩‍🦱','golden hair':'👩‍🦱✨',
+  'glass slipper':'👠','seven small men':'🧑🧑🧑','wooden':'🪵',
+  'nose grows':'👃','real boy':'✅','pumpkin carriage':'🎃',
+  'lightning bolt scar':'⚡','owl':'🦉','thousands of balloons':'🎈🎈',
+  'two teams':'👥','referee whistle':'🔔','referee':'🧑‍⚖️',
+  'shield logo':'🛡️','team':'👥','family':'👨‍👩‍👧‍👦',
+  'yellow minion':'🟡','three girls':'👧👧👧',
+  'sleeping beauty':'💤👸','enchanted forest':'🌲✨',
+  'hidden treasure':'💎','dragon':'🐉','crown':'👑',
+  'magic mirror':'🪞✨','brave knight':'⚔️','ocean swallowed':'🌊',
+  'blue fairy':'🧚💙','pitch':'🧱','ice castle':'🏰❄️',
+  'desk':'📚','girl with books':'👧📚','map':'🗺️',
+  'eight lanes':'8️⃣🏊','stopwatch':'⏱️','goggles':'🥽','gold medal':'🥇',
+  'doors':'🚪','monster world':'👾','two best monster friends':'👾👾',
+  'night':'🌙','tin woodsman':'🤖','scarecrow':'🌾🎃',
+  'cowardly lion':'🦁','yellow brick road':'🟡🛤️','wizard':'🧙',
+  'four runners':'🏃🏃','test':'✅','pea':'🟢','sliding':'🏂',
+  'voice':'🎤','red hair':'👩‍🦰','human world':'🌍','deuce':'🎾',
+  'space':'🌌','desert planet':'🏜️','dark side':'😈','force':'💫',
+  'moving day':'📦','buzz wings':'🚀','grand ship':'🚢',
+  'leaf cutter':'🌿','ant':'🐜','penalty box':'⬛','goalie mask':'😷',
+  'happy face':'😊','alien':'👽','ice':'❄️','snow':'❄️',
+};
+
+function _renderEmojiQuestion(rawText) {
+  // Replace every [token] with its emoji (or keep as-is if unknown)
+  const resolved = rawText.replace(/\[([^\]]+)\]/gi, (_, key) => {
+    const e = _EMOJI_MAP[key.trim().toLowerCase()];
+    return e ? `<span class="eq-token">${e}</span>` : `<span class="eq-token">[${key}]</span>`;
+  });
+  // Split "Decode this ...: [emojis]" into a header + emoji grid
+  const colonIdx = resolved.indexOf(':');
+  if (colonIdx > -1) {
+    const header = resolved.substring(0, colonIdx + 1).trim();
+    const body   = resolved.substring(colonIdx + 1).trim();
+    return `<span class="eq-prefix">${header}</span><div class="eq-grid">${body}</div>`;
+  }
+  return resolved;
 }
 
 function getAvatarSVG(charId, size) {
