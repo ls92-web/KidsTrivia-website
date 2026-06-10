@@ -364,8 +364,8 @@ body {
 .btn-primary:hover  { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 42px rgba(255,215,0,0.6); }
 .btn-primary:active { transform: translateY(1px)  scale(0.98); }
 
-.btn-huge  { font-size: 28px; padding: 20px 60px; }
-.btn-large { font-size: 22px; padding: 16px 44px; }
+.btn-huge  { font-size: 32px; padding: 20px 60px; }
+.btn-large { font-size: 25px; padding: 16px 44px; }
 
 .pulse-btn { animation: pulseGlow 2.5s infinite; }
 @keyframes pulseGlow {
@@ -864,7 +864,7 @@ body {
 .game-card.disabled-card { opacity: 0.3; cursor: not-allowed; transform: none !important; }
 
 .game-card-emoji { font-size: 40px; }
-.game-card-name { font-family: 'Fredoka One', cursive; font-size: 14px; color: rgba(190,220,255,0.95); line-height: 1.2; }
+.game-card-name { font-family: 'Fredoka One', cursive; font-size: 17px; color: rgba(190,220,255,0.95); line-height: 1.2; }
 .game-card-cat { font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 20px; color: white; opacity: 0.9; }
 .game-card-check {
   position: absolute; top: -10px; right: -10px;
@@ -942,8 +942,8 @@ body {
   to   { transform: scale(1) rotate(0deg);    opacity: 1; }
 }
 .switch-emoji { font-size: 72px; display: block; margin-bottom: 12px; }
-.switch-team  { font-family: 'Fredoka One', cursive; font-size: 42px; color: white; }
-.switch-sub   { font-size: 20px; font-weight: 700; color: rgba(140,190,255,0.8); margin-top: 8px; }
+.switch-team  { font-family: 'Fredoka One', cursive; font-size: 50px; color: white; }
+.switch-sub   { font-size: 24px; font-weight: 700; color: rgba(140,190,255,0.8); margin-top: 8px; }
 .switch-game  {
   background: linear-gradient(135deg, rgba(0,195,255,0.18), rgba(100,50,255,0.15));
   border: 1px solid rgba(0,195,255,0.3);
@@ -1007,20 +1007,20 @@ body {
 .panel-info { flex: 1; min-width: 0; }
 .t2-panel .panel-info { text-align: right; }
 .panel-name {
-  font-size: 11px; font-weight: 900;
+  font-size: 14px; font-weight: 900;
   color: rgba(190,220,255,0.9);
   text-transform: uppercase; letter-spacing: 0.5px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .panel-score {
   font-family: 'Fredoka One', cursive;
-  font-size: 34px; color: white; line-height: 1;
+  font-size: 42px; color: white; line-height: 1;
 }
-.panel-streak { font-size: 11px; font-weight: 800; color: rgba(255,160,30,0.9); margin-top: 2px; }
+.panel-streak { font-size: 13px; font-weight: 800; color: rgba(255,160,30,0.9); margin-top: 2px; }
 .panel-badges { display: flex; gap: 3px; align-items: center; }
 
 .score-bar-center { text-align: center; flex-shrink: 0; }
-.game-label { font-family: 'Fredoka One', cursive; font-size: 14px; color: rgba(140,190,255,0.9); white-space: nowrap; }
+.game-label { font-family: 'Fredoka One', cursive; font-size: 17px; color: rgba(140,190,255,0.9); white-space: nowrap; }
 .round-pips { display: flex; gap: 5px; justify-content: center; margin-top: 6px; }
 .pip {
   width: 10px; height: 10px; border-radius: 50%;
@@ -1041,7 +1041,7 @@ body {
     linear-gradient(168deg, rgba(10,16,46,0.95) 0%, rgba(4,8,26,0.98) 100%);
   border: 1.5px solid rgba(255,255,255,0.07);
   color: var(--t1-color);
-  font-family: 'Fredoka One', cursive; font-size: 22px;
+  font-family: 'Fredoka One', cursive; font-size: 26px;
   text-align: center; padding: 12px 20px; border-radius: 20px;
   position: relative; overflow: hidden;
   letter-spacing: 1px;
@@ -1129,9 +1129,9 @@ body {
   position: relative; z-index: 3;
 }
 .qcard-emoji { font-size: 28px; }
-.qcard-game  { font-family: 'Fredoka One', cursive; font-size: 17px; color: rgba(0,195,255,0.8); }
+.qcard-game  { font-family: 'Fredoka One', cursive; font-size: 21px; color: rgba(0,195,255,0.8); }
 .question-text {
-  font-size: 20px; font-weight: 800;
+  font-size: 24px; font-weight: 800;
   color: rgba(210,235,255,0.97);
   line-height: 1.55; text-align: center;
   min-height: 80px;
@@ -1159,12 +1159,12 @@ body {
   animation: slideUp 0.3s ease;
   position: relative; z-index: 3;
 }
-.answer-label { font-size: 11px; font-weight: 900; color: var(--neon-green); margin-bottom: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
-.answer-text  { font-size: 18px; font-weight: 800; color: rgba(190,255,220,0.97); }
+.answer-label { font-size: 13px; font-weight: 900; color: var(--neon-green); margin-bottom: 4px; letter-spacing: 1.5px; text-transform: uppercase; }
+.answer-text  { font-size: 22px; font-weight: 800; color: rgba(190,255,220,0.97); }
 .hint-box { margin-top: 10px; animation: slideUp 0.3s ease; position: relative; z-index: 3; }
 .hint-inner {
   background: rgba(255,215,0,0.06); border-radius: 12px;
-  padding: 12px 16px; font-size: 15px; font-weight: 700;
+  padding: 12px 16px; font-size: 17px; font-weight: 700;
   color: rgba(255,230,140,0.93);
   border: 1px solid rgba(255,215,0,0.2);
 }
@@ -2053,10 +2053,10 @@ body {
   .final-scores    { flex-direction: column; align-items: center; }
   .score-row       { flex-direction: column; }
   .btn-pass, .btn-gotit, .btn-continue { flex: none; width: 100%; }
-  .question-text   { font-size: 17px; }
+  .question-text   { font-size: 20px; }
   .winner-name     { font-size: 46px; }
   .team-panels     { gap: 6px; }
-  .panel-score     { font-size: 28px; }
+  .panel-score     { font-size: 34px; }
   .panel-avatar    { width: 36px; height: 36px; }
   .powerups-bar    { gap: 6px; }
   .powerup-btn     { min-width: 52px; padding: 8px 10px; }
