@@ -413,6 +413,7 @@ export default function Home() {
       {/* Warp tunnel */}
       <div id="warp-tunnel" className="warp-tunnel"></div>
 
+      <Script src="/sfx.js"  strategy="afterInteractive" />
       <Script src="/game.js" strategy="afterInteractive" />
     </>
   )

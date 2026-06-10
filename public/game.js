@@ -2772,6 +2772,7 @@ function selectMission(id) {
   if (_shipFlying) return;
   const ti = state.pickingTurn;
   if (state.selectedIds.includes(id)) return;
+  if (typeof SFX !== 'undefined') SFX.categorySelect();
 
   _shipFlying = true;
   const _safetyTimer = setTimeout(() => { _shipFlying = false; }, 3000);
@@ -3285,6 +3286,7 @@ function beginCurrentGame() {
 
 // ─── TEAM SWITCH ──────────────────────────────────────
 function showTeamSwitch() {
+  if (typeof SFX !== 'undefined') SFX.teamSwitch();
   const id = state.selectedIds[state.gameIdx];
   const g  = GAME_DATA[id];
   const t  = state.teams[state.teamIdx];
@@ -3472,6 +3474,7 @@ function recordAnswer(correct) {
   if (gotitBtn) { gotitBtn.disabled = true; gotitBtn.style.opacity = '0.4'; }
 
   if (correct) {
+    if (typeof SFX !== 'undefined') SFX.correct();
     const pts = state.doublePts ? 20 : 10;
     state.teams[ti].score += pts;
     state.streaks[ti]++;
@@ -3481,6 +3484,7 @@ function recordAnswer(correct) {
     showFeedback(`+${pts} pts!`, true);
     charReact(ti, 'correct');
   } else {
+    if (typeof SFX !== 'undefined') SFX.wrong();
     state.streaks[ti] = 0;
     state.doublePts = false;
     showFeedback('Next time!', false);
@@ -3508,6 +3512,7 @@ function showFeedback(msg, good) {
 
 // ─── GAME RESULT ───────────────────────────────────────
 function showGameResult() {
+  if (typeof SFX !== 'undefined') SFX.missionComplete();
   const gameNum = state.gameIdx + 1;
   const el = (id) => document.getElementById(id);
   el('gresult-title').textContent    = `Mission ${gameNum} Complete!`;
