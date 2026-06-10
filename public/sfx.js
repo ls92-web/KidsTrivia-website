@@ -5,7 +5,7 @@
 //  epic, premium, family-friendly, NOT cartoon or arcade.
 // ─────────────────────────────────────────────────────────────────────────────
 
-const SFX = (() => {
+window.SFX = (() => {
   'use strict';
 
   // ── Audio context (lazy init, respects autoplay policy) ───────────────────
@@ -279,8 +279,8 @@ const SFX = (() => {
 // ── Global button click sound (capture phase — fires before React handlers) ──
 document.addEventListener('click', function (e) {
   const btn = e.target.closest('button');
-  if (!btn || typeof SFX === 'undefined') return;
+  if (!btn || !window.SFX) return;
   // Buttons with data-sfx="skip" handle their own sound
   if (btn.dataset.sfx === 'skip') return;
-  SFX.btnClick();
+  window.SFX.btnClick();
 }, true);
