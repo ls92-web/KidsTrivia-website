@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'OPENROUTER_API_KEY not set' });
 
-  const model = process.env.OPENROUTER_MODEL || 'openai/gpt-oss-120b:free';
+  const model = process.env.OPENROUTER_MODEL || 'openai/gpt-oss-120b:free';  // default model
 
   const systemPrompt = `You are a hint writer for a kids trivia game called SpaceKids.
 Write a single short hint (1–2 sentences, max 20 words) for a trivia question.
