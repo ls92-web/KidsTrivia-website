@@ -3303,11 +3303,44 @@ function showTeamSwitch() {
   showScreen('screen-switch');
 }
 
+// ─── AI HELPERS ────────────────────────────────────────
+function _currentQuestion() { return state.currentQ || null; }
+function _currentGame() {
+  const id = state.selectedIds && state.selectedIds[state.gameIdx];
+  return id ? GAME_DATA[id] : null;
+}
+
+// Top up questions from AI when pool is nearly empty
+function _maybeTopUpQuestions(id) {
+  const g = GAME_DATA[id];
+  if (!g) return;
+  const used    = state.usedQs[id] ? state.usedQs[id].size : 0;
+  const total   = g.questions.length;
+  const remaining = total - used;
+  if (remaining > 3) return; // still plenty
+  if (g._aiLoading) return;  // already fetching
+  g._aiLoading = true;
+  fetch('/api/generate-questions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ gameId: id, gameName: g.name, category: g.category, count: 8 }),
+  })
+    .then(r => r.json())
+    .then(data => {
+      if (Array.isArray(data.questions) && data.questions.length) {
+        g.questions.push(...data.questions);
+      }
+      g._aiLoading = false;
+    })
+    .catch(() => { g._aiLoading = false; });
+}
+
 // ─── SHOW QUESTION ─────────────────────────────────────
 function showQuestion() {
   const id = state.selectedIds[state.gameIdx];
   const g  = GAME_DATA[id];
   const q  = pickQuestion(id);
+  _maybeTopUpQuestions(id);
   if (!q) {
     document.getElementById('qcard-game').textContent = g.name;
     document.getElementById('question-text').textContent =
@@ -3444,7 +3477,37 @@ function stopTimer() {
 
 // ─── HINT / ANSWER ─────────────────────────────────────
 function showHint() {
-  document.getElementById('hint-box').classList.remove('hidden');
+  const q = _currentQuestion();
+  const hintBox  = document.getElementById('hint-box');
+  const hintText = document.getElementById('hint-text');
+
+  // If we already have a hint, just show it
+  if (q && q.hint) {
+    hintBox.classList.remove('hidden');
+    return;
+  }
+
+  // No hint — ask AI to generate one
+  if (!q) { hintBox.classList.remove('hidden'); return; }
+  hintText.textContent = 'Generating hint…';
+  hintBox.classList.remove('hidden');
+
+  const g = _currentGame();
+  fetch('/api/generate-hint', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question: q.q, gameName: g ? g.name : '', answer: q.a || '' }),
+  })
+    .then(r => r.json())
+    .then(data => {
+      if (data.hint) {
+        q.hint = data.hint;
+        hintText.textContent = data.hint;
+      } else {
+        hintText.textContent = 'No hint available.';
+      }
+    })
+    .catch(() => { hintText.textContent = 'Could not load hint.'; });
 }
 function revealAnswer() {
   document.getElementById('answer-box').classList.remove('hidden');
