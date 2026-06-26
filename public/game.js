@@ -3372,7 +3372,7 @@ function showQuestion() {
   const _tc = state.teamCustom[state.teamIdx];
   banner.className = 'team-banner';
   banner.style.cssText = `background:linear-gradient(135deg,${_tc.color}1A,${_tc.color}06);border-color:${_tc.color}60;color:${_tc.color};box-shadow:0 0 22px ${_tc.color}20;`;
-  const _tname = state.teams[state.teamIdx].name;
+  const _tname = _escHtml(state.teams[state.teamIdx].name);
   const _poss  = _tname.endsWith('s') ? `${_tname}'` : `${_tname}'s`;
   banner.innerHTML = `<span style="display:inline-block;vertical-align:middle;margin-right:8px">${getAvatarSVG(_tc.charId, 32)}</span>${_poss} Turn!`;
 
@@ -3882,6 +3882,16 @@ function _cleanQ(str) {
   return (str||'').replace(/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27FF}\u{2300}-\u{23FF}\u{1F300}-\u{1F9FF}️⃣‍\s]+/gu,'').trim();
 }
 
+// HTML-escape any string before inserting into innerHTML
+function _escHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // ─── Emoji Stories: placeholder → emoji map ───────────────────────────────────
 const _EMOJI_MAP = {
   // Characters
@@ -3988,10 +3998,12 @@ const _EMOJI_MAP = {
 };
 
 function _renderEmojiQuestion(rawText) {
-  // Replace every [token] with its emoji (or keep as-is if unknown)
-  const resolved = rawText.replace(/\[([^\]]+)\]/gi, (_, key) => {
+  // Escape HTML first so AI-generated content can't inject tags,
+  // then replace [token] placeholders with emoji spans
+  const escaped = _escHtml(rawText);
+  const resolved = escaped.replace(/\[([^\]]+)\]/gi, (_, key) => {
     const e = _EMOJI_MAP[key.trim().toLowerCase()];
-    return e ? `<span class="eq-token">${e}</span>` : `<span class="eq-token">[${key}]</span>`;
+    return e ? `<span class="eq-token">${e}</span>` : `<span class="eq-token">[${_escHtml(key)}]</span>`;
   });
   // Split "Decode this ...: [emojis]" into a header + emoji grid
   const colonIdx = resolved.indexOf(':');
